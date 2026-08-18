@@ -16,7 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize all platform views and components
   initApp();
-  hideMandatoryAuthModal();
+
+  // If user is not signed in, pop up the Sign In / Sign Up modal first!
+  if (!currentUser.isLoggedIn) {
+    showMandatoryAuthModal();
+  } else {
+    hideMandatoryAuthModal();
+  }
+
   switchTab('feed-page');
 });
 
