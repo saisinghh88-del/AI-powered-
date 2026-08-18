@@ -295,6 +295,13 @@ function renderReelsFeed() {
         </div>
 
         <div>
+          <button class="action-btn-icon" onclick="toggleDislike('${reel.id}', this)">
+            <i class="fa-solid fa-thumbs-down"></i>
+          </button>
+          <div class="action-label">Dislike</div>
+        </div>
+
+        <div>
           <button class="action-btn-icon" onclick="openAnalysisForReel('${reel.id}')">
             <i class="fa-solid fa-chart-pie"></i>
           </button>

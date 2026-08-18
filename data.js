@@ -341,6 +341,14 @@ const INITIAL_USER = {
       note: "Flattens nested ifs for readable code."
     }
   ],
+  interests: [
+    { name: "Coding", weight: 90, icon: "fa-code" },
+    { name: "AI", weight: 95, icon: "fa-brain" },
+    { name: "Gaming", weight: 85, icon: "fa-gamepad" },
+    { name: "Programming", weight: 88, icon: "fa-laptop-code" },
+    { name: "Cybersecurity", weight: 45, icon: "fa-shield-halved" },
+    { name: "Web Dev", weight: 70, icon: "fa-globe" }
+  ],
   skillLevels: {
     "AI & PyTorch": 78,
     "Game Dev & Shaders": 65,
