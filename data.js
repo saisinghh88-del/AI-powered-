@@ -2,9 +2,11 @@
 const SUPABASE_ORGANISATION = "Aura Cafe";
 const SUPABASE_PROJECT_ID = "ksmkvocearakdpwekvyh";
 const SUPABASE_URL = "https://ksmkvocearakdpwekvyh.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtzbWt2b2NlYXJha2Rwd2VrdnloIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzAwMDAwMDAsImV4cCI6MTk4MDAwMDAwMH0.supabase_anon_key";
+const SUPABASE_ANON_KEY = (typeof localStorage !== 'undefined' && localStorage.getItem('supabase_anon_key')) 
+  ? localStorage.getItem('supabase_anon_key') 
+  : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtzbWt2b2NlYXJha2Rwd2VrdnloIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzAwMDAwMDAsImV4cCI6MTk4MDAwMDAwMH0.supabase_anon_key";
 
-// Initialize Supabase Client for Aura Cafe Org Project
+// Initialize Supabase Client for Aura Cafe Org Project (ksmkvocearakdpwekvyh)
 const supabase = (typeof window !== 'undefined' && window.supabase) 
   ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) 
   : null;
