@@ -162,6 +162,21 @@
 
       <!-- Learn Mode Side Overlay -->
       <div id="learn-panel" class="learn-mode-panel">
+        <!-- Interactive Side Quiz Widget -->
+        <div class="quiz-widget" style="background: linear-gradient(135deg, #EFF6FF, #F8FAFC); border: 2px solid var(--primary-light); box-shadow: var(--shadow-md); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <div style="font-weight: 800; font-size: 1rem; color: var(--dark-slate); display: flex; align-items: center; gap: 0.5rem;">
+              <i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Simple Coding Quiz
+            </div>
+            <span style="background: #FEF3C7; color: #D97706; font-size: 0.75rem; font-weight: 800; padding: 0.2rem 0.6rem; border-radius: 99px; border: 1px solid #FDE68A;">
+              <i class="fa-solid fa-bolt"></i> +50 XP
+            </span>
+          </div>
+          <p id="quiz-question-text" style="font-size: 0.92rem; font-weight: 700; color: var(--dark-slate); margin-bottom: 0.85rem; line-height: 1.4;"></p>
+          <div id="quiz-options-container" style="display: flex; flex-direction: column; gap: 0.5rem;"></div>
+          <div id="quiz-feedback-box" style="margin-top: 0.85rem; font-size: 0.88rem; font-weight: 700;"></div>
+        </div>
+
         <div class="ai-reasoning-card"
           style="background: linear-gradient(135deg, #FEF3C7, #FFFBEB); border-color: #FDE68A;">
           <div class="ai-reasoning-header" style="color: #D97706;">
@@ -224,16 +239,6 @@
           <ul id="learn-takeaways-list" class="takeaway-list">
             <!-- Rendered dynamically -->
           </ul>
-        </div>
-
-        <div class="quiz-widget">
-          <div
-            style="font-weight: 800; font-size: 0.92rem; color: var(--dark-slate); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="fa-solid fa-circle-question" style="color: var(--secondary);"></i> Quick Concept Quiz
-          </div>
-          <p id="quiz-question-text" style="font-size: 0.88rem; font-weight: 600; margin-bottom: 0.6rem;"></p>
-          <div id="quiz-options-container"></div>
-          <div id="quiz-feedback-box" style="margin-top: 0.6rem; font-size: 0.85rem; font-weight: 700;"></div>
         </div>
       </div>
     </div>

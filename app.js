@@ -590,13 +590,31 @@ function checkQuizAnswer(selectedIdx, correctIdx, explanation) {
     }
   });
 
+  const nextBtn = `<button style="margin-top: 0.6rem; display: inline-flex; align-items: center; gap: 0.4rem; background: var(--primary); color: white; border: none; padding: 0.4rem 0.85rem; border-radius: var(--radius-full); font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: var(--transition);" onclick="scrollReels('down')"><i class="fa-solid fa-arrow-down"></i> Next Coding Reel Quiz</button>`;
+
   if (selectedIdx === correctIdx) {
     currentUser.points += 50;
     renderDashboard();
-    feedback.innerHTML = `<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> Correct! +50 XP Points. ${explanation}</span>`;
-    showToast("Correct Answer! Earned +50 XP");
+    feedback.innerHTML = `
+      <div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: var(--radius-sm); padding: 0.75rem; color: #065F46;">
+        <div style="font-weight: 800; display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.25rem;">
+          <i class="fa-solid fa-circle-check" style="color: var(--success);"></i> Correct! +50 XP Earned
+        </div>
+        <p style="font-size: 0.82rem; font-weight: 500; margin: 0 0 0.5rem 0;">${explanation}</p>
+        ${nextBtn}
+      </div>
+    `;
+    showToast("Correct Answer! +50 XP Earned");
   } else {
-    feedback.innerHTML = `<span style="color: var(--danger);"><i class="fa-solid fa-triangle-exclamation"></i> Incorrect. ${explanation}</span>`;
+    feedback.innerHTML = `
+      <div style="background: #FEF2F2; border: 1px solid #FECACA; border-radius: var(--radius-sm); padding: 0.75rem; color: #991B1B;">
+        <div style="font-weight: 800; display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.25rem;">
+          <i class="fa-solid fa-triangle-exclamation" style="color: var(--danger);"></i> Incorrect Answer
+        </div>
+        <p style="font-size: 0.82rem; font-weight: 500; margin: 0 0 0.5rem 0;">${explanation}</p>
+        ${nextBtn}
+      </div>
+    `;
   }
 }
 
