@@ -310,7 +310,7 @@ const AI_BOT_CONVERSIONS = [
 const INITIAL_USER = {
   name: "Alex Dev",
   email: "alex.student@techlearn.edu",
-  isLoggedIn: true, // Default: Fully unlocked for instant access
+  isLoggedIn: false, // Default: Mandatory Sign In / Sign Up popup required before accessing site
   avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80",
   grade: "Undergraduate - CS Major",
   university: "Stanford University",

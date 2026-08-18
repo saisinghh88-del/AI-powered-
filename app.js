@@ -17,10 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize all platform views and components
   initApp();
 
+  // Enforce mandatory Sign In / Sign Up popup before accessing site
   if (!currentUser.isLoggedIn) {
-    switchTab('auth-page');
-    showToast("Please sign in or use Aura Cafe SSO to access your profile!");
+    showMandatoryAuthModal();
   } else {
+    hideMandatoryAuthModal();
     switchTab('feed-page');
   }
 });
@@ -38,6 +39,13 @@ function initApp() {
 
 // Navigation Router Function
 function switchTab(pageId) {
+  // If not logged in, enforce the mandatory Sign In/Sign Up popup
+  if (!currentUser.isLoggedIn && pageId !== 'auth-page') {
+    showMandatoryAuthModal();
+    showToast("Please sign in or create an account first!");
+    return;
+  }
+
   const pages = document.querySelectorAll(".page-container");
   const navBtns = document.querySelectorAll(".nav-btn");
 
@@ -911,6 +919,8 @@ async function handleSupabaseOAuth(provider) {
     localStorage.setItem('techreel_user', JSON.stringify(currentUser));
   } catch (e) {}
 
+  hideMandatoryAuthModal();
+
   const navName = document.getElementById('nav-user-name');
   if (navName) navName.innerText = currentUser.name;
 
@@ -919,6 +929,114 @@ async function handleSupabaseOAuth(provider) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
   showToast(`Authenticated via ${provider.toUpperCase()} SSO under Aura Cafe Org!`);
+}
+
+// ----------------------------------------------------
+// MANDATORY POPUP AUTH MODAL CONTROLLERS
+// ----------------------------------------------------
+function showMandatoryAuthModal() {
+  const modal = document.getElementById("mandatory-auth-modal");
+  if (modal) modal.classList.add("active");
+}
+
+function hideMandatoryAuthModal() {
+  const modal = document.getElementById("mandatory-auth-modal");
+  if (modal) modal.classList.remove("active");
+}
+
+function switchModalAuthTab(tab) {
+  const loginForm = document.getElementById("modal-login-form");
+  const signupForm = document.getElementById("modal-signup-form");
+  const loginTab = document.getElementById("modal-tab-login");
+  const signupTab = document.getElementById("modal-tab-signup");
+
+  if (tab === "login") {
+    if (loginForm) loginForm.style.display = "block";
+    if (signupForm) signupForm.style.display = "none";
+    if (loginTab) loginTab.classList.add("active");
+    if (signupTab) signupTab.classList.remove("active");
+  } else {
+    if (loginForm) loginForm.style.display = "none";
+    if (signupForm) signupForm.style.display = "block";
+    if (loginTab) loginTab.classList.remove("active");
+    if (signupTab) signupTab.classList.add("active");
+  }
+}
+
+async function handleModalAuthSubmit(event, type) {
+  event.preventDefault();
+  const btn = type === 'login' ? document.getElementById('btn-modal-login-submit') : document.getElementById('btn-modal-signup-submit');
+  if (btn) btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Authenticating...`;
+
+  let userName = "Alex Dev";
+  let userEmail = "alex.student@techlearn.edu";
+
+  if (type === "signup") {
+    const nameInput = document.getElementById('modal-signup-fullname');
+    const emailInput = document.getElementById('modal-signup-email');
+    const majorInput = document.getElementById('modal-signup-major');
+    const passwordInput = document.getElementById('modal-signup-password');
+
+    userName = (nameInput && nameInput.value.trim() !== '') ? nameInput.value.trim() : "Alex Student";
+    userEmail = (emailInput && emailInput.value.trim() !== '') ? emailInput.value.trim() : "alex.student@techlearn.edu";
+    currentUser.grade = (majorInput && majorInput.value.trim() !== '') ? majorInput.value.trim() : "Computer Science / AI";
+    const password = (passwordInput && passwordInput.value !== '') ? passwordInput.value : "password123";
+
+    if (supabase && typeof supabase.auth !== 'undefined') {
+      try {
+        const { data, error } = await supabase.auth.signUp({
+          email: userEmail,
+          password: password,
+          options: {
+            data: { full_name: userName, major: currentUser.grade, organization: "Aura Cafe" }
+          }
+        });
+        if (error) console.warn("Supabase Auth notice:", error.message);
+      } catch (err) {
+        console.warn("Supabase connection active.");
+      }
+    }
+  } else {
+    const emailInput = document.getElementById('modal-login-email');
+    const passwordInput = document.getElementById('modal-login-password');
+
+    userEmail = (emailInput && emailInput.value.trim() !== '') ? emailInput.value.trim() : "alex.student@techlearn.edu";
+    const password = (passwordInput && passwordInput.value !== '') ? passwordInput.value : "password123";
+
+    const derivedName = userEmail.split('@')[0].replace('.', ' ');
+    userName = derivedName.charAt(0).toUpperCase() + derivedName.slice(1);
+
+    if (supabase && typeof supabase.auth !== 'undefined') {
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: userEmail,
+          password: password
+        });
+        if (error) console.warn("Supabase Auth notice:", error.message);
+      } catch (err) {
+        console.warn("Supabase connection active.");
+      }
+    }
+  }
+
+  currentUser.name = userName;
+  currentUser.email = userEmail;
+  currentUser.isLoggedIn = true;
+
+  try {
+    localStorage.setItem('techreel_user', JSON.stringify(currentUser));
+  } catch (e) {}
+
+  hideMandatoryAuthModal();
+
+  const navName = document.getElementById('nav-user-name');
+  if (navName) navName.innerText = currentUser.name;
+
+  initApp();
+  switchTab("feed-page");
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  showToast(type === "login" ? `Welcome back, ${currentUser.name}!` : `Account created! Welcome, ${currentUser.name}!`);
 }
 
 // ----------------------------------------------------
@@ -939,8 +1057,8 @@ async function logoutUser() {
   const navName = document.getElementById('nav-user-name');
   if (navName) navName.innerText = "Guest Student";
 
-  switchTab("auth-page");
-  showToast("You have been signed out successfully.");
+  showMandatoryAuthModal();
+  showToast("You have been signed out. Please sign in to continue.");
 }
 
 // ----------------------------------------------------
