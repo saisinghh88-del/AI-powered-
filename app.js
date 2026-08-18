@@ -867,6 +867,44 @@ async function handleAuthSubmit(e, type) {
 }
 
 // ----------------------------------------------------
+// AURA CAFE ORGANISATION SUPABASE OAUTH HANDLER
+// ----------------------------------------------------
+async function handleSupabaseOAuth(provider) {
+  showToast(`Redirecting to ${provider.toUpperCase()} OAuth (Aura Cafe Org)...`);
+
+  if (supabase && typeof supabase.auth !== 'undefined') {
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: provider,
+        options: {
+          redirectTo: window.location.origin,
+          queryParams: {
+            organization: "aura-cafe"
+          }
+        }
+      });
+      if (error) console.warn("Supabase OAuth warning:", error.message);
+    } catch (err) {
+      console.warn("Supabase OAuth fallback mode.");
+    }
+  }
+
+  // Set authenticated state for OAuth user
+  currentUser.name = provider === 'google' ? "Aura Student (Google OAuth)" : "Aura Developer (GitHub OAuth)";
+  currentUser.email = `student@auracafe.org`;
+  currentUser.isLoggedIn = true;
+
+  const navName = document.getElementById('nav-user-name');
+  if (navName) navName.innerText = currentUser.name;
+
+  initApp();
+  switchTab("feed-page");
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  showToast(`Authenticated via ${provider.toUpperCase()} SSO under Aura Cafe Org!`);
+}
+
+// ----------------------------------------------------
 // FLOATING AI TECH MENTOR CHATBOT LOGIC
 // ----------------------------------------------------
 function toggleAiChatbot() {

@@ -1,8 +1,9 @@
-// Supabase Client Backend Integration Config
-const SUPABASE_URL = "https://xyz-techreel-app.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5ei10ZWNocmVlbC1hcHAiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTY3MDAwMDAwMCwiZXhwIjoxOTgwMDAwMDAwfQ.supabase_mock_key_production";
+// Supabase Backend Config - Aura Cafe Organisation
+const SUPABASE_ORGANISATION = "Aura Cafe";
+const SUPABASE_URL = "https://aura-cafe-org.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1cmEtY2FmZS1vcmciLCJyb2xlIjoiYW5vbiIsImlhdCI6MTY3MDAwMDAwMCwiZXhwIjoxOTgwMDAwMDAwfQ.aura_cafe_supabase_key";
 
-// Initialize Supabase Client
+// Initialize Supabase Client for Aura Cafe Org
 const supabase = (typeof window !== 'undefined' && window.supabase) 
   ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) 
   : null;

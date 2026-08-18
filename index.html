@@ -730,6 +730,21 @@ computeLighting(0.85, 0.92);
         </div>
         <button type="submit" class="btn-primary">Create Student Account</button>
       </form>
+
+      <!-- Aura Cafe Organisation Supabase OAuth SSO Providers -->
+      <div style="margin-top: 1.5rem; pt: 1rem; border-top: 1px solid var(--border-light); text-align: center;">
+        <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem;">
+          <i class="fa-solid fa-building-user" style="color: var(--primary);"></i> Aura Cafe Org Single Sign-On (OAuth)
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <button style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: white; border: 1px solid var(--border-light); padding: 0.6rem; border-radius: var(--radius-md); font-size: 0.85rem; font-weight: 700; color: var(--dark-slate); cursor: pointer; box-shadow: var(--shadow-sm);" onclick="handleSupabaseOAuth('google')">
+            <i class="fa-brands fa-google" style="color: #EA4335;"></i> Google SSO
+          </button>
+          <button style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: #24292F; border: none; padding: 0.6rem; border-radius: var(--radius-md); font-size: 0.85rem; font-weight: 700; color: white; cursor: pointer; box-shadow: var(--shadow-sm);" onclick="handleSupabaseOAuth('github')">
+            <i class="fa-brands fa-github"></i> GitHub SSO
+          </button>
+        </div>
+      </div>
     </div>
   </main>
 
