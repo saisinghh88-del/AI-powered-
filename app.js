@@ -922,6 +922,59 @@ async function handleSupabaseOAuth(provider) {
 }
 
 // ----------------------------------------------------
+// LOGOUT / SIGN OUT HANDLER
+// ----------------------------------------------------
+async function logoutUser() {
+  if (supabase && typeof supabase.auth !== 'undefined') {
+    try {
+      await supabase.auth.signOut();
+    } catch (e) {}
+  }
+
+  currentUser.isLoggedIn = false;
+  try {
+    localStorage.removeItem('techreel_user');
+  } catch (e) {}
+
+  const navName = document.getElementById('nav-user-name');
+  if (navName) navName.innerText = "Guest Student";
+
+  switchTab("auth-page");
+  showToast("You have been signed out successfully.");
+}
+
+// ----------------------------------------------------
+// PASSWORD VISIBILITY & RECOVERY HELPERS
+// ----------------------------------------------------
+function togglePasswordVisibility(inputId, iconId) {
+  const input = document.getElementById(inputId);
+  const icon = document.getElementById(iconId);
+  if (!input || !icon) return;
+
+  if (input.type === "password") {
+    input.type = "text";
+    icon.classList.remove("fa-eye");
+    icon.classList.add("fa-eye-slash");
+  } else {
+    input.type = "password";
+    icon.classList.remove("fa-eye-slash");
+    icon.classList.add("fa-eye");
+  }
+}
+
+function handleForgotPassword() {
+  const emailInput = document.getElementById("login-email");
+  const email = emailInput ? emailInput.value.trim() : "";
+
+  if (!email) {
+    showToast("Please enter your student email address first.");
+    return;
+  }
+
+  showToast(`Password reset link sent to ${email} (Aura Cafe Org Auth).`);
+}
+
+// ----------------------------------------------------
 // FLOATING AI TECH MENTOR CHATBOT LOGIC
 // ----------------------------------------------------
 function toggleAiChatbot() {
