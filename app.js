@@ -823,9 +823,14 @@ function handleAuthSubmit(e, type) {
   const navName = document.getElementById('nav-user-name');
   if (navName) navName.innerText = currentUser.name;
 
+  // Initialize all application views and immediately redirect to direct Home Feed page
   initApp();
   switchTab("feed-page");
-  showToast(type === "login" ? `Welcome back, ${currentUser.name}!` : `Account created! Welcome, ${currentUser.name}.`);
+
+  // Scroll main container to top of home page
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  showToast(type === "login" ? `Welcome back, ${currentUser.name}! Full website access unlocked.` : `Account created! Welcome, ${currentUser.name}. Full website access unlocked.`);
 }
 
 // Utility Toast Function
