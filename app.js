@@ -736,10 +736,34 @@ function switchAuthTab(tab) {
 
 function handleAuthSubmit(e, type) {
   e.preventDefault();
+  
+  if (type === 'signup') {
+    const nameInput = document.querySelector('#signup-form input[placeholder="Alex Student"]');
+    const emailInput = document.querySelector('#signup-form input[type="email"]');
+    if (nameInput && nameInput.value.trim() !== '') {
+      currentUser.name = nameInput.value.trim();
+    }
+    if (emailInput && emailInput.value.trim() !== '') {
+      currentUser.email = emailInput.value.trim();
+    }
+  } else {
+    const emailInput = document.querySelector('#login-form input[type="email"]');
+    if (emailInput && emailInput.value.trim() !== '') {
+      currentUser.email = emailInput.value.trim();
+      const derivedName = currentUser.email.split('@')[0].replace('.', ' ');
+      currentUser.name = derivedName.charAt(0).toUpperCase() + derivedName.slice(1);
+    }
+  }
+
   currentUser.isLoggedIn = true;
+
+  // Update Header Profile Badge
+  const navName = document.getElementById('nav-user-name');
+  if (navName) navName.innerText = currentUser.name;
+
   initApp();
   switchTab("feed-page");
-  showToast(type === "login" ? "Signed in successfully! Welcome to TechReel AI." : "Account created! Welcome to TechReel AI.");
+  showToast(type === "login" ? `Welcome back, ${currentUser.name}!` : `Account created! Welcome, ${currentUser.name}.`);
 }
 
 // Utility Toast Function
