@@ -1,0 +1,25 @@
+/* Copy of styles for modular src directory */
+
+:root {
+  --bg-main: #F4F8FC;
+  --bg-card: #FFFFFF;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --border-light: #E1E9F5;
+  --primary: #0066FF;
+  --secondary: #38BDF8;
+  --indigo: #6366F1;
+  --dark-slate: #0F172A;
+  --text-main: #1E293B;
+  --text-muted: #64748B;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --shadow-sm: 0 2px 8px rgba(0, 102, 255, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 102, 255, 0.08);
+  --shadow-lg: 0 16px 40px rgba(0, 102, 255, 0.12);
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
