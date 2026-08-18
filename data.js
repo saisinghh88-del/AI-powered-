@@ -240,12 +240,10 @@ const weatherTool = {
       "Structured output (JSON schema) ensures reliable function invocation.",
       "ReAct loop: Reason -> Act (Tool Call) -> Observe -> Final Answer."
     ],
-    quiz: {
-      question: "What enables an AI agent to query live external data?",
-      options: ["Model fine-tuning only", "Function / Tool Calling APIs", "Increasing temperature parameter", "Prompt repetition"],
-      correct: 1,
-      explanation: "Function/Tool Calling allows the model to output parameters that run live external APIs."
-    },
+    recommendedCourses: [
+      { name: "Building Autonomous Agents in JS & Python", platform: "DeepAI Institute", duration: "5h 00m" }
+    ]
+  },
   {
     id: "reel-6",
     title: "Electric Vehicle (EV) Battery Management Systems & Physics",
