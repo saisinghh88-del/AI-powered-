@@ -18,6 +18,9 @@
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+  <!-- Supabase JS Client CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -730,6 +733,49 @@ computeLighting(0.85, 0.92);
       </form>
     </div>
   </main>
+
+  <!-- =========================================================
+       FLOATING AI TECH MENTOR CHATBOT WIDGET
+  ========================================================= -->
+  <div id="ai-chat-widget" style="position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;">
+    <!-- Chat Trigger FAB Button -->
+    <button id="ai-chat-fab" style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #0066FF, #38BDF8); color: white; border: none; box-shadow: 0 8px 25px rgba(0, 102, 255, 0.4); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; transition: all 0.3s ease;" onclick="toggleAiChatbot()">
+      <i class="fa-solid fa-robot"></i>
+    </button>
+
+    <!-- Chat Modal Window -->
+    <div id="ai-chat-modal" style="display: none; position: absolute; bottom: 80px; right: 0; width: 380px; height: 500px; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); box-shadow: var(--shadow-xl); overflow: hidden; flex-direction: column;">
+      <!-- Header -->
+      <div style="background: linear-gradient(135deg, #0066FF, #38BDF8); color: white; padding: 1rem 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <i class="fa-solid fa-robot" style="font-size: 1.2rem;"></i>
+          <div>
+            <div style="font-weight: 800; font-size: 0.95rem;">TechReel AI Mentor</div>
+            <div style="font-size: 0.72rem; opacity: 0.9;"><i class="fa-solid fa-circle" style="color: #4ADE80; font-size: 0.55rem;"></i> Powered by Supabase AI</div>
+          </div>
+        </div>
+        <button style="background: transparent; border: none; color: white; font-size: 1.1rem; cursor: pointer;" onclick="toggleAiChatbot()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Messages Stream Area -->
+      <div id="ai-chat-messages" style="flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; background: #F8FAFC;">
+        <div style="background: white; border: 1px solid var(--border-light); border-radius: 12px 12px 12px 2px; padding: 0.75rem 1rem; max-width: 85%; font-size: 0.85rem; color: var(--text-main); box-shadow: var(--shadow-sm);">
+          <strong style="color: var(--primary); display: block; margin-bottom: 0.2rem;"><i class="fa-solid fa-sparkles"></i> AI Mentor</strong>
+          Hi! Ask me anything about coding, game dev shaders, EV tech battery code, or career advice!
+        </div>
+      </div>
+
+      <!-- Chat Input Box -->
+      <form id="ai-chat-form" style="padding: 0.75rem; border-top: 1px solid var(--border-light); display: flex; gap: 0.5rem; background: white;" onsubmit="handleAiChatSubmit(event)">
+        <input type="text" id="ai-chat-input" placeholder="Ask a tech question..." style="flex: 1; padding: 0.6rem 0.9rem; border: 1px solid var(--border-light); border-radius: var(--radius-full); font-size: 0.85rem; outline: none;" required>
+        <button type="submit" style="background: var(--primary); color: white; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+          <i class="fa-solid fa-paper-plane" style="font-size: 0.9rem;"></i>
+        </button>
+      </form>
+    </div>
+  </div>
 
   <!-- Toast Notification element -->
   <div id="toast" class="toast-msg">

@@ -1,5 +1,13 @@
-// Comprehensive mock dataset of educational tech reels, AI analysis, quizzes, and user profile templates
+// Supabase Client Backend Integration Config
+const SUPABASE_URL = "https://xyz-techreel-app.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5ei10ZWNocmVlbC1hcHAiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTY3MDAwMDAwMCwiZXhwIjoxOTgwMDAwMDAwfQ.supabase_mock_key_production";
 
+// Initialize Supabase Client
+const supabase = (typeof window !== 'undefined' && window.supabase) 
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) 
+  : null;
+
+// Comprehensive mock dataset of educational tech reels, AI analysis, quizzes, and user profile templates
 const REELS_DATA = [
   {
     id: "reel-1",
