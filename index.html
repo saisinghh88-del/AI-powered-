@@ -65,10 +65,15 @@
             <i class="fa-solid fa-graduation-cap"></i> Dashboard
           </button>
         </li>
+        <li>
+          <button class="nav-btn" id="btn-profile" onclick="switchTab('profile-page')">
+            <i class="fa-solid fa-user"></i> My Profile
+          </button>
+        </li>
       </ul>
     </nav>
 
-    <div class="user-profile-widget" onclick="switchTab('auth-page')">
+    <div class="user-profile-widget" onclick="switchTab('profile-page')">
       <img id="nav-user-avatar" class="user-avatar"
         src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80"
         alt="Student Profile">
@@ -584,6 +589,97 @@ computeLighting(0.85, 0.92);
       <div id="saved-notebook-container"
         style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
         <!-- Notebook Cards rendered dynamically -->
+      </div>
+    </div>
+  </main>
+
+  <!-- =========================================================
+       PAGE 7: STUDENT PERSONAL PROFILE PAGE
+  ========================================================= -->
+  <main id="profile-page" class="page-container">
+    <div class="section-header">
+      <div>
+        <h1 class="section-title"><i class="fa-solid fa-user-gear" style="color: var(--primary);"></i> Student Personal Profile</h1>
+        <p class="section-subtitle">Manage your personal information, academic bio, learning preferences, and account security.</p>
+      </div>
+      <button class="btn-primary" style="width: auto; padding: 0.6rem 1.8rem;" onclick="savePersonalProfile()">
+        <i class="fa-solid fa-floppy-disk"></i> Update Profile
+      </button>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem;">
+      <!-- Profile Card Left Sidebar -->
+      <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 2rem; box-shadow: var(--shadow-sm); text-align: center; display: flex; flex-direction: column; align-items: center;">
+        <img id="profile-card-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80" style="width: 110px; height: 110px; border-radius: 50%; border: 4px solid var(--secondary); margin-bottom: 1rem; object-fit: cover;">
+        <h2 id="profile-card-name" style="font-size: 1.4rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 0.2rem;">Alex Dev</h2>
+        <span id="profile-card-major" style="font-size: 0.85rem; color: var(--primary); font-weight: 700; background: var(--primary-light); padding: 0.25rem 0.8rem; border-radius: 99px; margin-bottom: 1rem;">Undergraduate - CS Major</span>
+        
+        <div style="width: 100%; border-top: 1px solid var(--border-light); padding-top: 1.2rem; display: flex; flex-direction: column; gap: 0.75rem; text-align: left; font-size: 0.88rem;">
+          <div style="display: flex; align-items: center; gap: 0.6rem;">
+            <i class="fa-solid fa-envelope" style="color: var(--text-muted); width: 20px;"></i>
+            <span id="profile-card-email">alex.student@techlearn.edu</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.6rem;">
+            <i class="fa-solid fa-graduation-cap" style="color: var(--text-muted); width: 20px;"></i>
+            <span id="profile-card-university">Stanford University</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.6rem;">
+            <i class="fa-solid fa-location-dot" style="color: var(--text-muted); width: 20px;"></i>
+            <span id="profile-card-location">California, USA</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Personal Information Form Right Container -->
+      <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 2rem; box-shadow: var(--shadow-sm);">
+        <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-id-card" style="color: var(--indigo);"></i> Edit Personal Information
+        </h3>
+
+        <form id="personal-info-form" onsubmit="event.preventDefault(); savePersonalProfile();">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" id="profile-input-name" class="form-input" value="Alex Dev" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" id="profile-input-email" class="form-input" value="alex.student@techlearn.edu" required>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+            <div class="form-group">
+              <label class="form-label">University / Institution</label>
+              <input type="text" id="profile-input-university" class="form-input" value="Stanford University">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Academic Major / Field</label>
+              <input type="text" id="profile-input-major" class="form-input" value="Computer Science / AI">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+            <div class="form-group">
+              <label class="form-label">Student Location</label>
+              <input type="text" id="profile-input-location" class="form-input" value="California, USA">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Preferred Programming Language</label>
+              <select id="profile-input-lang" class="form-input">
+                <option value="Python">Python</option>
+                <option value="JavaScript / TypeScript">JavaScript / TypeScript</option>
+                <option value="C++ / HLSL Shaders">C++ / HLSL Shaders</option>
+                <option value="Embedded C">Embedded C (EV Tech)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Student Learning Bio & Goals</label>
+            <textarea id="profile-input-bio" class="form-input" style="height: 90px; resize: none;">Computer science student passionate about game physics shaders, autonomous AI agents, and electric vehicle firmware code.</textarea>
+          </div>
+        </form>
       </div>
     </div>
   </main>

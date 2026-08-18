@@ -22,6 +22,7 @@ function initApp() {
   renderRecommendations();
   renderAiBotConversions();
   renderDashboard();
+  renderPersonalProfile();
   renderAnalysisPage(currentReels[0]);
 }
 
@@ -48,7 +49,8 @@ function switchTab(pageId) {
     "recs-page": "btn-recs",
     "compiler-page": "btn-compiler",
     "interests-page": "btn-interests",
-    "dashboard-page": "btn-dashboard"
+    "dashboard-page": "btn-dashboard",
+    "profile-page": "btn-profile"
   };
 
   if (btnMap[pageId]) {
@@ -57,6 +59,66 @@ function switchTab(pageId) {
   }
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Render and Update Student Personal Profile
+function renderPersonalProfile() {
+  // Update Left Sidebar Profile Card
+  const cardAvatar = document.getElementById("profile-card-avatar");
+  const cardName = document.getElementById("profile-card-name");
+  const cardMajor = document.getElementById("profile-card-major");
+  const cardEmail = document.getElementById("profile-card-email");
+  const cardUni = document.getElementById("profile-card-university");
+  const cardLoc = document.getElementById("profile-card-location");
+
+  if (cardAvatar) cardAvatar.src = currentUser.avatar;
+  if (cardName) cardName.innerText = currentUser.name;
+  if (cardMajor) cardMajor.innerText = currentUser.grade || "Computer Science Major";
+  if (cardEmail) cardEmail.innerText = currentUser.email;
+  if (cardUni) cardUni.innerText = currentUser.university || "Stanford University";
+  if (cardLoc) cardLoc.innerText = currentUser.location || "California, USA";
+
+  // Update Form Inputs
+  const inputName = document.getElementById("profile-input-name");
+  const inputEmail = document.getElementById("profile-input-email");
+  const inputUni = document.getElementById("profile-input-university");
+  const inputMajor = document.getElementById("profile-input-major");
+  const inputLoc = document.getElementById("profile-input-location");
+  const inputLang = document.getElementById("profile-input-lang");
+  const inputBio = document.getElementById("profile-input-bio");
+
+  if (inputName) inputName.value = currentUser.name;
+  if (inputEmail) inputEmail.value = currentUser.email;
+  if (inputUni) inputUni.value = currentUser.university || "Stanford University";
+  if (inputMajor) inputMajor.value = currentUser.grade || "Computer Science Major";
+  if (inputLoc) inputLoc.value = currentUser.location || "California, USA";
+  if (inputLang) inputLang.value = currentUser.preferredLang || "Python";
+  if (inputBio) inputBio.value = currentUser.bio || "Computer Science student passionate about AI & Engineering.";
+}
+
+function savePersonalProfile() {
+  const inputName = document.getElementById("profile-input-name");
+  const inputEmail = document.getElementById("profile-input-email");
+  const inputUni = document.getElementById("profile-input-university");
+  const inputMajor = document.getElementById("profile-input-major");
+  const inputLoc = document.getElementById("profile-input-location");
+  const inputLang = document.getElementById("profile-input-lang");
+  const inputBio = document.getElementById("profile-input-bio");
+
+  if (inputName && inputName.value.trim() !== '') currentUser.name = inputName.value.trim();
+  if (inputEmail && inputEmail.value.trim() !== '') currentUser.email = inputEmail.value.trim();
+  if (inputUni) currentUser.university = inputUni.value.trim();
+  if (inputMajor) currentUser.grade = inputMajor.value.trim();
+  if (inputLoc) currentUser.location = inputLoc.value.trim();
+  if (inputLang) currentUser.preferredLang = inputLang.value;
+  if (inputBio) currentUser.bio = inputBio.value.trim();
+
+  // Refresh nav header and profile view
+  const navName = document.getElementById('nav-user-name');
+  if (navName) navName.innerText = currentUser.name;
+
+  renderPersonalProfile();
+  showToast("Personal profile information updated!");
 }
 
 // ----------------------------------------------------

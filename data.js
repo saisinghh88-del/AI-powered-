@@ -303,6 +303,10 @@ const INITIAL_USER = {
   isLoggedIn: false, // Default: Must login first!
   avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80",
   grade: "Undergraduate - CS Major",
+  university: "Stanford University",
+  location: "California, USA",
+  preferredLang: "Python",
+  bio: "Computer science student passionate about game physics shaders, autonomous AI agents, and electric vehicle firmware code.",
   weeklyGoalHours: 5,
   completedHours: 3.4,
   watchTimeMinutes: 204,
