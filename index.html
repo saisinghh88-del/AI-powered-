@@ -701,12 +701,11 @@ computeLighting(0.85, 0.92);
       <form id="login-form" onsubmit="handleAuthSubmit(event, 'login')">
         <div class="form-group">
           <label class="form-label">Student Email</label>
-          <input type="email" class="form-input" placeholder="student@university.edu" required
-            value="alex.student@techlearn.edu">
+          <input type="email" id="login-email" class="form-input" placeholder="student@university.edu" required value="alex.student@techlearn.edu">
         </div>
         <div class="form-group">
           <label class="form-label">Password</label>
-          <input type="password" class="form-input" placeholder="••••••••" required value="password123">
+          <input type="password" id="login-password" class="form-input" placeholder="••••••••" required value="password123">
         </div>
         <button type="submit" class="btn-primary">Sign In to TechReel AI</button>
       </form>
@@ -715,19 +714,19 @@ computeLighting(0.85, 0.92);
       <form id="signup-form" style="display: none;" onsubmit="handleAuthSubmit(event, 'signup')">
         <div class="form-group">
           <label class="form-label">Full Name</label>
-          <input type="text" class="form-input" placeholder="Alex Student" required>
+          <input type="text" id="signup-fullname" class="form-input" placeholder="Alex Student" required value="Alex Student">
         </div>
         <div class="form-group">
           <label class="form-label">Student Email</label>
-          <input type="email" class="form-input" placeholder="student@university.edu" required>
+          <input type="email" id="signup-email" class="form-input" placeholder="student@university.edu" required value="alex.student@techlearn.edu">
         </div>
         <div class="form-group">
           <label class="form-label">Major / Field of Study</label>
-          <input type="text" class="form-input" placeholder="Computer Science / AI / Gaming" required>
+          <input type="text" id="signup-major" class="form-input" placeholder="Computer Science / AI / Gaming" required value="Computer Science / AI">
         </div>
         <div class="form-group">
           <label class="form-label">Password</label>
-          <input type="password" class="form-input" placeholder="••••••••" required>
+          <input type="password" id="signup-password" class="form-input" placeholder="••••••••" required value="password123">
         </div>
         <button type="submit" class="btn-primary">Create Student Account</button>
       </form>

@@ -803,13 +803,13 @@ async function handleAuthSubmit(e, type) {
   let userName = "";
 
   if (type === 'signup') {
-    const nameInput = document.querySelector('#signup-form input[placeholder="Alex Student"]');
-    const emailInput = document.querySelector('#signup-form input[type="email"]');
-    const passwordInput = document.querySelector('#signup-form input[type="password"]');
+    const nameInput = document.getElementById('signup-fullname');
+    const emailInput = document.getElementById('signup-email');
+    const passwordInput = document.getElementById('signup-password');
 
-    userName = nameInput ? nameInput.value.trim() : "Alex Student";
-    userEmail = emailInput ? emailInput.value.trim() : "alex.student@techlearn.edu";
-    const password = passwordInput ? passwordInput.value : "password123";
+    userName = (nameInput && nameInput.value.trim() !== '') ? nameInput.value.trim() : "Alex Student";
+    userEmail = (emailInput && emailInput.value.trim() !== '') ? emailInput.value.trim() : "alex.student@techlearn.edu";
+    const password = (passwordInput && passwordInput.value !== '') ? passwordInput.value : "password123";
 
     // Attempt Supabase Auth Sign Up
     if (supabase && typeof supabase.auth !== 'undefined') {
@@ -825,11 +825,11 @@ async function handleAuthSubmit(e, type) {
       }
     }
   } else {
-    const emailInput = document.querySelector('#login-form input[type="email"]');
-    const passwordInput = document.querySelector('#login-form input[type="password"]');
+    const emailInput = document.getElementById('login-email');
+    const passwordInput = document.getElementById('login-password');
 
-    userEmail = emailInput ? emailInput.value.trim() : "alex.student@techlearn.edu";
-    const password = passwordInput ? passwordInput.value : "password123";
+    userEmail = (emailInput && emailInput.value.trim() !== '') ? emailInput.value.trim() : "alex.student@techlearn.edu";
+    const password = (passwordInput && passwordInput.value !== '') ? passwordInput.value : "password123";
 
     const derivedName = userEmail.split('@')[0].replace('.', ' ');
     userName = derivedName.charAt(0).toUpperCase() + derivedName.slice(1);
@@ -863,7 +863,7 @@ async function handleAuthSubmit(e, type) {
   // Scroll main container to top of home page
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  showToast(type === "login" ? `Supabase Auth Success! Welcome back, ${currentUser.name}.` : `Supabase Account Created! Welcome, ${currentUser.name}.`);
+  showToast(type === "login" ? `Signed In successfully! Welcome, ${currentUser.name}.` : `Account Created! Welcome, ${currentUser.name}.`);
 }
 
 // ----------------------------------------------------
