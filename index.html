@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AI-Powered Student Tech Recommendation Platform. Convert short video scrolling into interactive learning and skill building.">
+  <meta name="description"
+    content="AI-Powered Student Tech Recommendation Platform. Convert short video scrolling into interactive learning and skill building.">
   <title>TechReel AI - AI-Powered Recommendation & Learn Platform</title>
-  
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
   <!-- Navigation Bar -->
@@ -64,7 +69,9 @@
     </nav>
 
     <div class="user-profile-widget" onclick="switchTab('auth-page')">
-      <img id="nav-user-avatar" class="user-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80" alt="Student Profile">
+      <img id="nav-user-avatar" class="user-avatar"
+        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80"
+        alt="Student Profile">
       <div class="user-info-text">
         <span id="nav-user-name" class="user-name">Alex Dev</span>
         <span id="nav-user-streak" class="user-badge"><i class="fa-solid fa-fire"></i> 6 Day Streak</span>
@@ -77,16 +84,20 @@
   ========================================================= -->
   <main id="feed-page" class="page-container active">
     <!-- Quick Horizontal Mini-Reels Carousel -->
-    <div style="margin-bottom: 1.5rem; background: var(--bg-card); padding: 1rem 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-light); box-shadow: var(--shadow-sm);">
+    <div
+      style="margin-bottom: 1.5rem; background: var(--bg-card); padding: 1rem 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-light); box-shadow: var(--shadow-sm);">
       <div style="display: flex; justify-content: space-between; align-align: center; margin-bottom: 0.75rem;">
-        <span style="font-weight: 800; font-size: 0.95rem; color: var(--dark-slate); display: flex; align-items: center; gap: 0.5rem;">
+        <span
+          style="font-weight: 800; font-size: 0.95rem; color: var(--dark-slate); display: flex; align-items: center; gap: 0.5rem;">
           <i class="fa-solid fa-fire" style="color: var(--warning);"></i> Quick Trending Reels (Tap to Jump)
         </span>
-        <span style="font-size: 0.8rem; color: var(--primary); font-weight: 700; cursor: pointer;" onclick="showToast('Swipe horizontally to preview reels!')">
+        <span style="font-size: 0.8rem; color: var(--primary); font-weight: 700; cursor: pointer;"
+          onclick="showToast('Swipe horizontally to preview reels!')">
           <i class="fa-solid fa-arrows-left-right"></i> Scroll Mini Reels
         </span>
       </div>
-      <div id="mini-reels-carousel" style="display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem; scroll-behavior: smooth;">
+      <div id="mini-reels-carousel"
+        style="display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem; scroll-behavior: smooth;">
         <!-- Rendered dynamically via app.js -->
       </div>
     </div>
@@ -99,7 +110,8 @@
 
       <!-- Learn Mode Side Overlay -->
       <div id="learn-panel" class="learn-mode-panel">
-        <div class="ai-reasoning-card" style="background: linear-gradient(135deg, #FEF3C7, #FFFBEB); border-color: #FDE68A;">
+        <div class="ai-reasoning-card"
+          style="background: linear-gradient(135deg, #FEF3C7, #FFFBEB); border-color: #FDE68A;">
           <div class="ai-reasoning-header" style="color: #D97706;">
             <i class="fa-solid fa-face-smile" style="color: #D97706;"></i> Easy Student Explanation (ELI5)
           </div>
@@ -108,7 +120,8 @@
           </p>
         </div>
 
-        <div class="ai-reasoning-card" style="background: linear-gradient(135deg, #ECFDF5, #F0FDF4); border-color: #A7F3D0;">
+        <div class="ai-reasoning-card"
+          style="background: linear-gradient(135deg, #ECFDF5, #F0FDF4); border-color: #A7F3D0;">
           <div class="ai-reasoning-header" style="color: #059669;">
             <i class="fa-solid fa-lightbulb" style="color: #059669;"></i> Real-World Analogy
           </div>
@@ -119,7 +132,8 @@
 
         <div>
           <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--dark-slate);">
-            <i class="fa-solid fa-spell-check" style="color: var(--secondary);"></i> Key Terms Glossary (Simple Definition)
+            <i class="fa-solid fa-spell-check" style="color: var(--secondary);"></i> Key Terms Glossary (Simple
+            Definition)
           </h3>
           <div id="learn-keywords-container" style="display: flex; flex-direction: column; gap: 0.5rem;">
             <!-- Keyword tags rendered dynamically -->
@@ -136,9 +150,12 @@
         </div>
 
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--dark-slate); display: flex; justify-content: space-between; align-items: center;">
+          <h3
+            style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--dark-slate); display: flex; justify-content: space-between; align-items: center;">
             <span><i class="fa-solid fa-code" style="color: var(--primary);"></i> Executable Code Breakdown</span>
-            <button style="background: var(--primary-light); border: 1px solid var(--primary); color: var(--primary); font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: var(--radius-full); cursor: pointer;" onclick="openCurrentReelInCompiler()">
+            <button
+              style="background: var(--primary-light); border: 1px solid var(--primary); color: var(--primary); font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: var(--radius-full); cursor: pointer;"
+              onclick="openCurrentReelInCompiler()">
               <i class="fa-solid fa-play"></i> Run in Compiler
             </button>
           </h3>
@@ -158,7 +175,8 @@
         </div>
 
         <div class="quiz-widget">
-          <div style="font-weight: 800; font-size: 0.92rem; color: var(--dark-slate); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+          <div
+            style="font-weight: 800; font-size: 0.92rem; color: var(--dark-slate); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
             <i class="fa-solid fa-circle-question" style="color: var(--secondary);"></i> Quick Concept Quiz
           </div>
           <p id="quiz-question-text" style="font-size: 0.88rem; font-weight: 600; margin-bottom: 0.6rem;"></p>
@@ -175,8 +193,10 @@
   <main id="analysis-page" class="page-container">
     <div class="section-header">
       <div>
-        <h1 class="section-title"><i class="fa-solid fa-microchip" style="color: var(--primary);"></i> AI Reel Deep-Dive Analysis</h1>
-        <p class="section-subtitle">Comprehensive breakdown of technical concepts, complexity scores, and student applications.</p>
+        <h1 class="section-title"><i class="fa-solid fa-microchip" style="color: var(--primary);"></i> AI Reel Deep-Dive
+          Analysis</h1>
+        <p class="section-subtitle">Comprehensive breakdown of technical concepts, complexity scores, and student
+          applications.</p>
       </div>
       <button class="btn-primary" style="width: auto; padding: 0.6rem 1.5rem;" onclick="generateAiReport()">
         <i class="fa-solid fa-rotate-right"></i> Refresh Analysis
@@ -186,22 +206,27 @@
     <div class="analysis-grid">
       <div class="analysis-main-card">
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-          <span id="analysis-category-badge" class="category-tag"><i class="fa-solid fa-gamepad"></i> Gaming Graphics</span>
+          <span id="analysis-category-badge" class="category-tag"><i class="fa-solid fa-gamepad"></i> Gaming
+            Graphics</span>
           <span style="font-weight: 700; color: var(--primary); font-size: 0.9rem;">
             <i class="fa-solid fa-signal"></i> Difficulty: <span id="analysis-difficulty">Intermediate</span>
           </span>
         </div>
 
-        <h2 id="analysis-title" style="font-size: 1.5rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1rem;">
+        <h2 id="analysis-title"
+          style="font-size: 1.5rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1rem;">
           How Game Engines Use Math & Shader Code for Lighting
         </h2>
 
         <p id="analysis-summary" style="color: var(--text-main); font-size: 1rem; margin-bottom: 1rem;">
-          This content explores the fundamental linear algebra behind real-time 3D lighting shaders. By evaluating the vector dot product of surface normals and light rays, GPUs perform calculations for thousands of pixels in parallel.
+          This content explores the fundamental linear algebra behind real-time 3D lighting shaders. By evaluating the
+          vector dot product of surface normals and light rays, GPUs perform calculations for thousands of pixels in
+          parallel.
         </p>
 
         <!-- Simplified Explanation Block -->
-        <div style="background: #FFFBEB; border: 1px solid #FDE68A; padding: 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+        <div
+          style="background: #FFFBEB; border: 1px solid #FDE68A; padding: 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
           <div style="font-weight: 800; color: #D97706; font-size: 0.95rem; margin-bottom: 0.4rem;">
             <i class="fa-solid fa-face-smile"></i> Plain English Explanation (ELI5)
           </div>
@@ -217,9 +242,12 @@
             <i class="fa-solid fa-diagram-project" style="color: var(--indigo);"></i> Technical Knowledge Tree
           </h3>
           <div id="mindmap-container">
-            <div class="mindmap-node"><i class="fa-solid fa-arrow-right"></i> 1. Linear Algebra: Vector Dot Product (N · L)</div>
-            <div class="mindmap-node"><i class="fa-solid fa-arrow-right"></i> 2. GPU Architecture: Fragment Shaders & Rasterization</div>
-            <div class="mindmap-node"><i class="fa-solid fa-arrow-right"></i> 3. Game Engine Implementation: HLSL / GLSL Code</div>
+            <div class="mindmap-node"><i class="fa-solid fa-arrow-right"></i> 1. Linear Algebra: Vector Dot Product (N ·
+              L)</div>
+            <div class="mindmap-node"><i class="fa-solid fa-arrow-right"></i> 2. GPU Architecture: Fragment Shaders &
+              Rasterization</div>
+            <div class="mindmap-node"><i class="fa-solid fa-arrow-right"></i> 3. Game Engine Implementation: HLSL / GLSL
+              Code</div>
           </div>
         </div>
 
@@ -227,9 +255,11 @@
           <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--dark-slate); margin-bottom: 0.75rem;">
             <i class="fa-solid fa-laptop-code" style="color: var(--primary);"></i> Hands-on Student Project Idea
           </h3>
-          <div style="background: #F0F7FF; border: 1px solid #BFDBFE; padding: 1.25rem; border-radius: var(--radius-md);">
+          <div
+            style="background: #F0F7FF; border: 1px solid #BFDBFE; padding: 1.25rem; border-radius: var(--radius-md);">
             <p style="font-size: 0.92rem; font-weight: 600; color: var(--dark-slate);">
-              Build a Three.js interactive lighting simulator where users adjust light angle sliders to observe real-time diffuse shading updates.
+              Build a Three.js interactive lighting simulator where users adjust light angle sliders to observe
+              real-time diffuse shading updates.
             </p>
           </div>
         </div>
@@ -242,11 +272,15 @@
           </h3>
           <div class="skill-bar-row">
             <div class="skill-label-flex"><span>3D Graphics Math</span><span>+15 pts</span></div>
-            <div class="progress-track"><div class="progress-fill" style="width: 85%;"></div></div>
+            <div class="progress-track">
+              <div class="progress-fill" style="width: 85%;"></div>
+            </div>
           </div>
           <div class="skill-bar-row">
             <div class="skill-label-flex"><span>GPU Shaders (HLSL)</span><span>+20 pts</span></div>
-            <div class="progress-track"><div class="progress-fill" style="width: 70%;"></div></div>
+            <div class="progress-track">
+              <div class="progress-fill" style="width: 70%;"></div>
+            </div>
           </div>
         </div>
 
@@ -267,35 +301,46 @@
   <main id="compiler-page" class="page-container">
     <div class="section-header">
       <div>
-        <h1 class="section-title"><i class="fa-solid fa-code" style="color: var(--primary);"></i> Student Live Code Compiler & Sandbox</h1>
-        <p class="section-subtitle">Write, edit, run, and test code for JavaScript, Python, HTML/CSS, and C++ algorithm snippets instantly.</p>
+        <h1 class="section-title"><i class="fa-solid fa-code" style="color: var(--primary);"></i> Student Live Code
+          Compiler & Sandbox</h1>
+        <p class="section-subtitle">Write, edit, run, and test code for JavaScript, Python, HTML/CSS, and C++ algorithm
+          snippets instantly.</p>
       </div>
       <div style="display: flex; gap: 0.5rem;">
-        <button class="nav-btn active" id="lang-btn-js" onclick="selectCompilerLanguage('javascript')">JavaScript</button>
+        <button class="nav-btn active" id="lang-btn-js"
+          onclick="selectCompilerLanguage('javascript')">JavaScript</button>
         <button class="nav-btn" id="lang-btn-py" onclick="selectCompilerLanguage('python')">Python</button>
         <button class="nav-btn" id="lang-btn-html" onclick="selectCompilerLanguage('html')">HTML/CSS Preview</button>
         <button class="nav-btn" id="lang-btn-cpp" onclick="selectCompilerLanguage('cpp')">C++ (Simulated)</button>
       </div>
     </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; height: calc(100vh - 200px); min-height: 500px;">
+    <div
+      style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; height: calc(100vh - 200px); min-height: 500px;">
       <!-- Code Editor Panel -->
-      <div style="background: var(--dark-slate); border-radius: var(--radius-lg); padding: 1.25rem; display: flex; flex-direction: column; border: 1px solid var(--border-light); box-shadow: var(--shadow-md);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; color: white;">
+      <div
+        style="background: var(--dark-slate); border-radius: var(--radius-lg); padding: 1.25rem; display: flex; flex-direction: column; border: 1px solid var(--border-light); box-shadow: var(--shadow-md);">
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; color: white;">
           <span style="font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="fa-solid fa-terminal" style="color: var(--secondary);"></i> Editor (<span id="current-lang-label">JavaScript</span>)
+            <i class="fa-solid fa-terminal" style="color: var(--secondary);"></i> Editor (<span
+              id="current-lang-label">JavaScript</span>)
           </span>
           <div style="display: flex; gap: 0.5rem;">
-            <button onclick="resetCompilerTemplate()" style="background: rgba(255,255,255,0.1); border: none; color: #94A3B8; padding: 0.3rem 0.7rem; border-radius: var(--radius-sm); font-size: 0.8rem; cursor: pointer;">
+            <button onclick="resetCompilerTemplate()"
+              style="background: rgba(255,255,255,0.1); border: none; color: #94A3B8; padding: 0.3rem 0.7rem; border-radius: var(--radius-sm); font-size: 0.8rem; cursor: pointer;">
               <i class="fa-solid fa-rotate-left"></i> Reset
             </button>
-            <button onclick="runCodeInCompiler()" class="btn-primary" style="width: auto; padding: 0.4rem 1.2rem; font-size: 0.88rem; background: linear-gradient(135deg, var(--success), #059669);">
+            <button onclick="runCodeInCompiler()" class="btn-primary"
+              style="width: auto; padding: 0.4rem 1.2rem; font-size: 0.88rem; background: linear-gradient(135deg, var(--success), #059669);">
               <i class="fa-solid fa-play"></i> Run Code (Ctrl+Enter)
             </button>
           </div>
         </div>
 
-        <textarea id="compiler-editor" style="flex: 1; width: 100%; background: #080E1A; color: #7DD3FC; font-family: 'Fira Code', monospace; font-size: 0.92rem; padding: 1rem; border: 1px solid #1E293B; border-radius: var(--radius-md); resize: none; outline: none; line-height: 1.5; tab-size: 2;" spellcheck="false">// Select a reel snippet or start writing your code here...
+        <textarea id="compiler-editor"
+          style="flex: 1; width: 100%; background: #080E1A; color: #7DD3FC; font-family: 'Fira Code', monospace; font-size: 0.92rem; padding: 1rem; border: 1px solid #1E293B; border-radius: var(--radius-md); resize: none; outline: none; line-height: 1.5; tab-size: 2;"
+          spellcheck="false">// Select a reel snippet or start writing your code here...
 function computeLighting(normalAngle, lightAngle) {
   const dotProduct = Math.max(0, normalAngle * lightAngle);
   console.log("Computed Surface Brightness:", dotProduct * 100 + "%");
@@ -307,23 +352,29 @@ computeLighting(0.85, 0.92);
       </div>
 
       <!-- Compiler Output & Console Panel -->
-      <div style="background: var(--bg-card); border-radius: var(--radius-lg); padding: 1.25rem; display: flex; flex-direction: column; border: 1px solid var(--border-light); box-shadow: var(--shadow-md);">
+      <div
+        style="background: var(--bg-card); border-radius: var(--radius-lg); padding: 1.25rem; display: flex; flex-direction: column; border: 1px solid var(--border-light); box-shadow: var(--shadow-md);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-          <span style="font-weight: 800; font-size: 0.95rem; color: var(--dark-slate); display: flex; align-items: center; gap: 0.5rem;">
+          <span
+            style="font-weight: 800; font-size: 0.95rem; color: var(--dark-slate); display: flex; align-items: center; gap: 0.5rem;">
             <i class="fa-solid fa-square-poll-vertical" style="color: var(--primary);"></i> Execution Output & Console
           </span>
-          <button onclick="clearCompilerConsole()" style="background: var(--primary-light); border: none; color: var(--primary); font-size: 0.78rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: var(--radius-sm); cursor: pointer;">
+          <button onclick="clearCompilerConsole()"
+            style="background: var(--primary-light); border: none; color: var(--primary); font-size: 0.78rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: var(--radius-sm); cursor: pointer;">
             Clear Console
           </button>
         </div>
 
-        <div id="compiler-console-output" style="flex: 1; background: #0B1329; color: #F1F5F9; font-family: 'Fira Code', monospace; font-size: 0.88rem; padding: 1rem; border-radius: var(--radius-md); overflow-y: auto; white-space: pre-wrap; line-height: 1.5;">
-// Click "Run Code" above to execute your program...
+        <div id="compiler-console-output"
+          style="flex: 1; background: #0B1329; color: #F1F5F9; font-family: 'Fira Code', monospace; font-size: 0.88rem; padding: 1rem; border-radius: var(--radius-md); overflow-y: auto; white-space: pre-wrap; line-height: 1.5;">
+          // Click "Run Code" above to execute your program...
         </div>
 
-        <div style="margin-top: 1rem; padding: 0.75rem; background: #F0F7FF; border: 1px solid #BFDBFE; border-radius: var(--radius-sm); display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; color: var(--dark-slate); font-weight: 600;">
+        <div
+          style="margin-top: 1rem; padding: 0.75rem; background: #F0F7FF; border: 1px solid #BFDBFE; border-radius: var(--radius-sm); display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; color: var(--dark-slate); font-weight: 600;">
           <i class="fa-solid fa-circle-info" style="color: var(--primary);"></i>
-          <span>Supports real-time JavaScript evaluation, Python interpreter, HTML live rendering, and C++ algorithm simulation!</span>
+          <span>Supports real-time JavaScript evaluation, Python interpreter, HTML live rendering, and C++ algorithm
+            simulation!</span>
         </div>
       </div>
     </div>
@@ -335,8 +386,10 @@ computeLighting(0.85, 0.92);
   <main id="interests-page" class="page-container">
     <div class="section-header">
       <div>
-        <h1 class="section-title"><i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Student Interest Profile</h1>
-        <p class="section-subtitle">Customize tech topic weights to fine-tune your personalized AI recommendation engine.</p>
+        <h1 class="section-title"><i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Student Interest
+          Profile</h1>
+        <p class="section-subtitle">Customize tech topic weights to fine-tune your personalized AI recommendation
+          engine.</p>
       </div>
       <button class="btn-primary" style="width: auto; padding: 0.6rem 1.8rem;" onclick="saveInterests()">
         <i class="fa-solid fa-floppy-disk"></i> Save Preferences
@@ -347,9 +400,11 @@ computeLighting(0.85, 0.92);
       <!-- Interest Cards Rendered dynamically -->
     </div>
 
-    <div style="background: var(--bg-card); border-radius: var(--radius-lg); padding: 2rem; border: 1px solid var(--border-light); box-shadow: var(--shadow-sm);">
+    <div
+      style="background: var(--bg-card); border-radius: var(--radius-lg); padding: 2rem; border: 1px solid var(--border-light); box-shadow: var(--shadow-sm);">
       <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1rem;">
-        <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--secondary);"></i> AI Learning Goals & Skill Target
+        <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--secondary);"></i> AI Learning Goals & Skill
+        Target
       </h3>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
         <div>
@@ -375,17 +430,21 @@ computeLighting(0.85, 0.92);
   <main id="recs-page" class="page-container">
     <div class="section-header">
       <div>
-        <h1 class="section-title"><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--indigo);"></i> AI Recommendation Bot</h1>
+        <h1 class="section-title"><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--indigo);"></i> AI
+          Recommendation Bot</h1>
         <p class="section-subtitle">Converts student raw interest topics into high-value educational tech reels.</p>
       </div>
     </div>
 
     <!-- AI Bot Interest Conversion Banner -->
-    <div style="background: linear-gradient(135deg, #1E1B4B, #312E81); color: white; border-radius: var(--radius-lg); padding: 1.75rem; margin-bottom: 2rem; box-shadow: var(--shadow-md);">
-      <div style="font-weight: 800; font-size: 1.1rem; color: #A5B4FC; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+    <div
+      style="background: linear-gradient(135deg, #1E1B4B, #312E81); color: white; border-radius: var(--radius-lg); padding: 1.75rem; margin-bottom: 2rem; box-shadow: var(--shadow-md);">
+      <div
+        style="font-weight: 800; font-size: 1.1rem; color: #A5B4FC; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
         <i class="fa-solid fa-robot"></i> AI Recommendation Bot Engine (Interest -> Tech Conversion)
       </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;" id="ai-bot-conversions-container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;"
+        id="ai-bot-conversions-container">
         <!-- Rendered dynamically -->
       </div>
     </div>
@@ -401,7 +460,8 @@ computeLighting(0.85, 0.92);
   <main id="dashboard-page" class="page-container">
     <div class="section-header">
       <div>
-        <h1 class="section-title"><i class="fa-solid fa-graduation-cap" style="color: var(--primary);"></i> Student Learning Dashboard</h1>
+        <h1 class="section-title"><i class="fa-solid fa-graduation-cap" style="color: var(--primary);"></i> Student
+          Learning Dashboard</h1>
         <p class="section-subtitle">Track your watch stats, tech skill growth, and saved concept notebook.</p>
       </div>
     </div>
@@ -452,8 +512,10 @@ computeLighting(0.85, 0.92);
     <!-- AI Detected Interests & Recommended Careers Section -->
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
       <!-- AI Detected Interests -->
-      <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 1.5rem; box-shadow: var(--shadow-sm);">
-        <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+      <div
+        style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+        <h3
+          style="font-size: 1.15rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
           <i class="fa-solid fa-brain" style="color: var(--primary);"></i> AI Detected Interests (Topic + Context)
         </h3>
         <div id="dash-ai-interests-container" style="display: flex; flex-direction: column; gap: 0.75rem;">
@@ -462,8 +524,10 @@ computeLighting(0.85, 0.92);
       </div>
 
       <!-- Recommended Careers -->
-      <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 1.5rem; box-shadow: var(--shadow-sm);">
-        <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+      <div
+        style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+        <h3
+          style="font-size: 1.15rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
           <i class="fa-solid fa-briefcase" style="color: var(--indigo);"></i> Recommended Tech Careers
         </h3>
         <div id="dash-careers-container" style="display: flex; flex-direction: column; gap: 0.75rem;">
@@ -474,7 +538,8 @@ computeLighting(0.85, 0.92);
 
     <!-- Dashboard Split: Skills Explored & Weekly Report -->
     <div class="dashboard-split" style="margin-bottom: 2rem;">
-      <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 1.75rem; box-shadow: var(--shadow-sm);">
+      <div
+        style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 1.75rem; box-shadow: var(--shadow-sm);">
         <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1.5rem;">
           <i class="fa-solid fa-chart-column" style="color: var(--primary);"></i> Tech Skills Explored & Mastered
         </h3>
@@ -483,22 +548,26 @@ computeLighting(0.85, 0.92);
         </div>
       </div>
 
-      <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 1.75rem; box-shadow: var(--shadow-sm);">
+      <div
+        style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 1.75rem; box-shadow: var(--shadow-sm);">
         <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1.25rem;">
           <i class="fa-solid fa-file-lines" style="color: var(--secondary);"></i> Weekly Learning Report
         </h3>
-        <div id="dash-weekly-report" style="background: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 1.25rem; font-size: 0.88rem; color: var(--text-main); line-height: 1.6;">
+        <div id="dash-weekly-report"
+          style="background: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 1.25rem; font-size: 0.88rem; color: var(--text-main); line-height: 1.6;">
           <!-- Weekly report rendered dynamically -->
         </div>
       </div>
     </div>
 
     <!-- Saved Concept Notebook -->
-    <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 1.75rem; box-shadow: var(--shadow-sm);">
+    <div
+      style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 1.75rem; box-shadow: var(--shadow-sm);">
       <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1.25rem;">
         <i class="fa-solid fa-book-bookmark" style="color: var(--indigo);"></i> Saved Concept Notebook
       </h3>
-      <div id="saved-notebook-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+      <div id="saved-notebook-container"
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
         <!-- Notebook Cards rendered dynamically -->
       </div>
     </div>
@@ -518,7 +587,8 @@ computeLighting(0.85, 0.92);
       <form id="login-form" onsubmit="handleAuthSubmit(event, 'login')">
         <div class="form-group">
           <label class="form-label">Student Email</label>
-          <input type="email" class="form-input" placeholder="student@university.edu" required value="alex.student@techlearn.edu">
+          <input type="email" class="form-input" placeholder="student@university.edu" required
+            value="alex.student@techlearn.edu">
         </div>
         <div class="form-group">
           <label class="form-label">Password</label>
@@ -560,4 +630,5 @@ computeLighting(0.85, 0.92);
   <script src="data.js"></script>
   <script src="app.js"></script>
 </body>
+
 </html>
