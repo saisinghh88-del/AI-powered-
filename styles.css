@@ -239,22 +239,120 @@ body {
 ---------------------------------------------------- */
 .reels-feed-wrapper {
   display: flex;
-  gap: 2rem;
-  max-width: 1100px;
+  gap: 2.5rem;
+  max-width: 1200px;
   margin: 0 auto;
-  height: calc(100vh - 110px);
+  min-height: calc(100vh - 120px);
+  align-items: flex-start;
+}
+
+/* Instagram-Style Mobile Phone Frame Scroller */
+.instagram-phone-container {
+  flex: 0 0 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 85px;
+}
+
+.instagram-phone-frame {
+  width: 100%;
+  max-width: 370px;
+  height: 700px;
+  background: #000000;
+  border-radius: 46px;
+  border: 12px solid #0F172A;
+  box-shadow: 0 25px 60px -15px rgba(0, 102, 255, 0.35), 0 0 0 2px rgba(255, 255, 255, 0.15), inset 0 0 0 2px #1E293B;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dynamic Island Notch */
+.phone-dynamic-island {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110px;
+  height: 24px;
+  background: #000000;
+  border-radius: 20px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.phone-cam-lens {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #0F172A;
+  border: 1.5px solid #334155;
+}
+
+.phone-speaker-mesh {
+  width: 40px;
+  height: 4px;
+  border-radius: 4px;
+  background: #1E293B;
+}
+
+/* Instagram Header Bar */
+.instagram-top-bar {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 1rem;
+  color: white;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+}
+
+.instagram-logo-text {
+  font-size: 1.1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  letter-spacing: -0.5px;
+}
+
+/* Phone Home Indicator Bar */
+.phone-home-bar {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
+  z-index: 35;
 }
 
 .reels-vertical-scroll {
   flex: 1;
-  max-width: 480px;
+  width: 100%;
   height: 100%;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
   position: relative;
-  background: var(--dark-slate);
+  background: #000000;
+  scrollbar-width: none;
+}
+
+.reels-vertical-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 .reel-card {
@@ -265,7 +363,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: #080E1A;
+  background: #000000;
 }
 
 .reel-video-element {
@@ -280,8 +378,8 @@ body {
 .reel-overlay-top {
   position: relative;
   z-index: 10;
-  padding: 1.25rem;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+  padding: 4.5rem 1rem 0.5rem 1rem;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -849,11 +947,18 @@ body {
 @media (max-width: 900px) {
   .reels-feed-wrapper {
     flex-direction: column;
+    align-items: center;
     height: auto;
   }
-  .reels-vertical-scroll {
-    max-width: 100%;
-    height: 70vh;
+  .instagram-phone-container {
+    position: static;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 360px;
+    margin-bottom: 2rem;
+  }
+  .instagram-phone-frame {
+    height: 640px;
   }
   .analysis-grid, .dashboard-split {
     grid-template-columns: 1fr;

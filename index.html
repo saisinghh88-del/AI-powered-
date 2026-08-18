@@ -131,9 +131,33 @@
     </div>
 
     <div class="reels-feed-wrapper">
-      <!-- Vertical Scroll Reel Container -->
-      <div id="reels-container" class="reels-vertical-scroll">
-        <!-- Rendered dynamically via app.js -->
+      <!-- Instagram-Style Phone Frame Reel Scroller -->
+      <div class="instagram-phone-container">
+        <div class="instagram-phone-frame">
+          <!-- Dynamic Island Notch -->
+          <div class="phone-dynamic-island">
+            <div class="phone-cam-lens"></div>
+            <div class="phone-speaker-mesh"></div>
+          </div>
+
+          <!-- Top Instagram Reels Navigation -->
+          <div class="instagram-top-bar">
+            <div class="instagram-logo-text">
+              <span>Reels</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i>
+            </div>
+            <div style="display: flex; gap: 0.75rem; align-items: center;">
+              <i class="fa-solid fa-camera" style="font-size: 1rem; cursor: pointer;" onclick="showToast('Camera upload mode ready!')"></i>
+            </div>
+          </div>
+
+          <!-- Vertical Snap Reel Scroller Container -->
+          <div id="reels-container" class="reels-vertical-scroll">
+            <!-- Rendered dynamically via app.js -->
+          </div>
+
+          <!-- Phone Bottom Home Indicator -->
+          <div class="phone-home-bar"></div>
+        </div>
       </div>
 
       <!-- Learn Mode Side Overlay -->

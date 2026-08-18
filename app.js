@@ -430,13 +430,25 @@ function renderReelsFeed() {
       </div>
 
       <div class="reel-overlay-bottom">
-        <div class="creator-bar">
-          <img class="creator-avatar" src="${reel.creatorAvatar}" alt="${reel.creator}">
-          <span class="creator-name">${reel.creator}</span>
+        <div class="creator-bar" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <img class="creator-avatar" src="${reel.creatorAvatar}" alt="${reel.creator}" style="width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--secondary);">
+            <span class="creator-name" style="font-size: 0.88rem; font-weight: 700;">${reel.creator}</span>
+          </div>
+          <button style="background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.4); color: white; padding: 0.2rem 0.65rem; border-radius: 99px; font-size: 0.72rem; font-weight: 700; cursor: pointer; backdrop-filter: blur(4px);" onclick="showToast('Followed ${reel.creator}!')">
+            Follow
+          </button>
         </div>
-        <div class="reel-title-text">${reel.title}</div>
-        <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
-          ${reel.tags.map(t => `<span style="font-size: 0.72rem; background: rgba(255,255,255,0.15); padding: 0.2rem 0.6rem; border-radius: 4px;">#${t}</span>`).join('')}
+
+        <div class="reel-title-text" style="font-size: 0.95rem; font-weight: 700; line-height: 1.35; margin-bottom: 0.4rem;">${reel.title}</div>
+        
+        <div style="display: flex; gap: 0.35rem; flex-wrap: wrap; margin-bottom: 0.4rem;">
+          ${reel.tags.map(t => `<span style="font-size: 0.68rem; background: rgba(255,255,255,0.15); padding: 0.15rem 0.5rem; border-radius: 4px;">#${t}</span>`).join('')}
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.72rem; opacity: 0.9; color: #E2E8F0;">
+          <i class="fa-solid fa-music" style="font-size: 0.68rem; color: #38BDF8;"></i>
+          <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 210px;">Original Audio - ${reel.creator} • TechReel AI</span>
         </div>
       </div>
     `;
