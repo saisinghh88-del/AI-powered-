@@ -359,26 +359,42 @@ function renderReelsFeed() {
 
       <div class="reel-overlay-top">
         <span class="category-tag"><i class="fa-solid fa-tag"></i> ${reel.category}</span>
-        <span class="ai-match-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> ${reel.aiMatchScore}% AI Match</span>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="action-btn-icon" style="width: 34px; height: 34px; font-size: 0.85rem;" onclick="toggleVideoSound(this)" title="Toggle Audio">
+            <i class="fa-solid fa-volume-xmark"></i>
+          </button>
+          <span class="ai-match-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> ${reel.aiMatchScore}% AI Match</span>
+        </div>
       </div>
 
       <!-- Live Floating Concept Pill on Reel Scroll -->
-      <div style="position: absolute; top: 4.5rem; left: 1rem; right: 1rem; z-index: 10; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); border: 1px solid rgba(56, 189, 248, 0.4); padding: 0.6rem 0.9rem; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.3); animation: fadeIn 0.4s ease;">
+      <div style="position: absolute; top: 4.5rem; left: 1rem; right: 1rem; z-index: 10; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(10px); border: 1px solid rgba(56, 189, 248, 0.4); padding: 0.6rem 0.9rem; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.3); animation: fadeIn 0.4s ease;">
         <div style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem;">
           <i class="fa-solid fa-lightbulb" style="color: var(--warning); font-size: 1rem;"></i>
           <div>
             <div style="font-weight: 800; color: #7DD3FC; font-size: 0.75rem;">WHILE SCROLLING CONCEPT</div>
-            <div style="font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 220px;">${reel.keyTakeaways[0]}</div>
+            <div style="font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">${reel.keyTakeaways[0]}</div>
           </div>
         </div>
-        <button onclick="openCurrentReelInCompiler()" style="background: var(--primary); border: none; color: white; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.7rem; border-radius: var(--radius-full); cursor: pointer; white-space: nowrap;">
+        <button onclick="openCurrentReelInCompiler()" style="background: var(--primary); border: none; color: white; font-size: 0.75rem; font-weight: 700; padding: 0.35rem 0.75rem; border-radius: var(--radius-full); cursor: pointer; white-space: nowrap; transition: var(--transition);">
           <i class="fa-solid fa-code"></i> Try Code
         </button>
       </div>
 
+      <!-- Vertical Scroll Reel Action Controls -->
       <div class="reel-actions-side">
+        <!-- Up / Down Quick Scroll Arrows -->
+        <div style="display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.4rem;">
+          <button class="action-btn-icon" style="width: 36px; height: 36px; font-size: 0.9rem; background: rgba(0, 102, 255, 0.6);" onclick="scrollReels('up')" title="Previous Reel">
+            <i class="fa-solid fa-chevron-up"></i>
+          </button>
+          <button class="action-btn-icon" style="width: 36px; height: 36px; font-size: 0.9rem; background: rgba(0, 102, 255, 0.6);" onclick="scrollReels('down')" title="Next Reel">
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+        </div>
+
         <div>
-          <button class="action-btn-icon" onclick="toggleLike('${reel.id}', this)">
+          <button class="action-btn-icon" id="like-btn-${reel.id}" onclick="toggleLike('${reel.id}', this)">
             <i class="fa-solid fa-heart"></i>
           </button>
           <div class="action-label" id="like-count-${reel.id}">${formatNumber(reel.likes)}</div>
@@ -453,6 +469,41 @@ function setupScrollObserver() {
   }, { threshold: 0.6 });
 
   cards.forEach(card => observer.observe(card));
+}
+
+// Quick Next / Previous Reel Scrolling Controls
+function scrollReels(direction) {
+  const container = document.getElementById("reels-container");
+  if (!container) return;
+
+  const cardHeight = container.clientHeight;
+  const currentScroll = container.scrollTop;
+
+  if (direction === 'down') {
+    container.scrollTo({ top: currentScroll + cardHeight, behavior: 'smooth' });
+  } else {
+    container.scrollTo({ top: Math.max(0, currentScroll - cardHeight), behavior: 'smooth' });
+  }
+}
+
+// Toggle Mute / Unmute for Reels
+function toggleVideoSound(btn) {
+  const card = btn.closest(".reel-card");
+  if (!card) return;
+  const video = card.querySelector("video");
+  if (!video) return;
+
+  video.muted = !video.muted;
+  const icon = btn.querySelector("i");
+  if (icon) {
+    if (video.muted) {
+      icon.className = "fa-solid fa-volume-xmark";
+      showToast("Audio Muted");
+    } else {
+      icon.className = "fa-solid fa-volume-high";
+      showToast("Audio Unmuted");
+    }
+  }
 }
 
 // Category Filter in Reels Feed
@@ -893,6 +944,12 @@ async function handleAuthSubmit(e, type) {
 
   hideMandatoryAuthModal();
 
+  if (btn) {
+    btn.innerHTML = type === 'login' 
+      ? `<i class="fa-solid fa-right-to-bracket"></i> Sign In to TechReel AI` 
+      : `<i class="fa-solid fa-user-plus"></i> Create Student Account`;
+  }
+
   // Update Header Profile Badge
   const navName = document.getElementById('nav-user-name');
   if (navName) navName.innerText = currentUser.name;
@@ -1048,6 +1105,12 @@ async function handleModalAuthSubmit(event, type) {
   } catch (e) {}
 
   hideMandatoryAuthModal();
+
+  if (btn) {
+    btn.innerHTML = type === 'login' 
+      ? `<i class="fa-solid fa-right-to-bracket"></i> Sign In to TechReel AI` 
+      : `<i class="fa-solid fa-user-plus"></i> Create Student Account`;
+  }
 
   const navName = document.getElementById('nav-user-name');
   if (navName) navName.innerText = currentUser.name;
