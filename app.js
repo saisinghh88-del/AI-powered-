@@ -6,12 +6,22 @@ let activeReelIndex = 0;
 let activeCategoryFilter = "All";
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Enforce mandatory login before seeing content
+  // Check localStorage for saved session
+  try {
+    const saved = localStorage.getItem('techreel_user');
+    if (saved) {
+      currentUser = { ...currentUser, ...JSON.parse(saved) };
+    }
+  } catch (e) {}
+
+  // Initialize all platform views and components
+  initApp();
+
   if (!currentUser.isLoggedIn) {
     switchTab('auth-page');
-    showToast("Please sign in to access TechReel AI features!");
+    showToast("Please sign in or use Aura Cafe SSO to access your profile!");
   } else {
-    initApp();
+    switchTab('feed-page');
   }
 });
 
@@ -26,14 +36,8 @@ function initApp() {
   renderAnalysisPage(currentReels[0]);
 }
 
-// Navigation Router Function with Strict Login Guard
+// Navigation Router Function
 function switchTab(pageId) {
-  // MUST LOGIN BEFORE ANYTHING TO USE THIS SITE
-  if (!currentUser.isLoggedIn && pageId !== 'auth-page') {
-    showToast("Must login before accessing website features!");
-    pageId = 'auth-page';
-  }
-
   const pages = document.querySelectorAll(".page-container");
   const navBtns = document.querySelectorAll(".nav-btn");
 
@@ -116,6 +120,10 @@ function savePersonalProfile() {
   // Refresh nav header and profile view
   const navName = document.getElementById('nav-user-name');
   if (navName) navName.innerText = currentUser.name;
+
+  try {
+    localStorage.setItem('techreel_user', JSON.stringify(currentUser));
+  } catch (e) {}
 
   renderPersonalProfile();
   showToast("Personal profile information updated!");
@@ -852,6 +860,11 @@ async function handleAuthSubmit(e, type) {
   currentUser.email = userEmail;
   currentUser.isLoggedIn = true;
 
+  // Persist session to localStorage
+  try {
+    localStorage.setItem('techreel_user', JSON.stringify(currentUser));
+  } catch (e) {}
+
   // Update Header Profile Badge
   const navName = document.getElementById('nav-user-name');
   if (navName) navName.innerText = currentUser.name;
@@ -893,6 +906,10 @@ async function handleSupabaseOAuth(provider) {
   currentUser.name = provider === 'google' ? "Aura Student (Google OAuth)" : "Aura Developer (GitHub OAuth)";
   currentUser.email = `student@auracafe.org`;
   currentUser.isLoggedIn = true;
+
+  try {
+    localStorage.setItem('techreel_user', JSON.stringify(currentUser));
+  } catch (e) {}
 
   const navName = document.getElementById('nav-user-name');
   if (navName) navName.innerText = currentUser.name;
