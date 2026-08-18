@@ -797,34 +797,40 @@ function copyCodeSnippet() {
 function switchAuthTab(tab) {
   const loginForm = document.getElementById("login-form");
   const signupForm = document.getElementById("signup-form");
-  const authBtns = document.querySelectorAll(".auth-tab-btn");
+  const pageContainer = document.getElementById("auth-page");
+  if (!loginForm || !signupForm) return;
 
+  const authBtns = pageContainer ? pageContainer.querySelectorAll(".auth-tab-btn") : [];
   authBtns.forEach(b => b.classList.remove("active"));
 
   if (tab === "login") {
     loginForm.style.display = "block";
     signupForm.style.display = "none";
-    authBtns[0].classList.add("active");
+    if (authBtns[0]) authBtns[0].classList.add("active");
   } else {
     loginForm.style.display = "none";
     signupForm.style.display = "block";
-    authBtns[1].classList.add("active");
+    if (authBtns[1]) authBtns[1].classList.add("active");
   }
 }
 
 async function handleAuthSubmit(e, type) {
   e.preventDefault();
-  
+  const btn = type === 'login' ? document.getElementById('btn-login-submit') : document.getElementById('btn-signup-submit');
+  if (btn) btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Authenticating...`;
+
   let userEmail = "";
   let userName = "";
 
   if (type === 'signup') {
     const nameInput = document.getElementById('signup-fullname');
     const emailInput = document.getElementById('signup-email');
+    const majorInput = document.getElementById('signup-major');
     const passwordInput = document.getElementById('signup-password');
 
     userName = (nameInput && nameInput.value.trim() !== '') ? nameInput.value.trim() : "Alex Student";
     userEmail = (emailInput && emailInput.value.trim() !== '') ? emailInput.value.trim() : "alex.student@techlearn.edu";
+    currentUser.grade = (majorInput && majorInput.value.trim() !== '') ? majorInput.value.trim() : "Computer Science / AI";
     const password = (passwordInput && passwordInput.value !== '') ? passwordInput.value : "password123";
 
     // Attempt Supabase Auth Sign Up
@@ -833,7 +839,7 @@ async function handleAuthSubmit(e, type) {
         const { data, error } = await supabase.auth.signUp({
           email: userEmail,
           password: password,
-          options: { data: { full_name: userName } }
+          options: { data: { full_name: userName, major: currentUser.grade, organization: "Aura Cafe" } }
         });
         if (error) console.warn("Supabase Auth notice:", error.message);
       } catch (err) {
@@ -872,6 +878,8 @@ async function handleAuthSubmit(e, type) {
   try {
     localStorage.setItem('techreel_user', JSON.stringify(currentUser));
   } catch (e) {}
+
+  hideMandatoryAuthModal();
 
   // Update Header Profile Badge
   const navName = document.getElementById('nav-user-name');
