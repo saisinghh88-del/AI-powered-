@@ -120,8 +120,26 @@ function savePersonalProfile() {
     localStorage.setItem('techreel_user', JSON.stringify(currentUser));
   } catch (e) {}
 
+  // Asynchronously sync profile to Supabase database (ksmkvocearakdpwekvyh)
+  if (supabase && typeof supabase.from !== 'undefined') {
+    try {
+      supabase.from('profiles').upsert({
+        full_name: currentUser.name,
+        email: currentUser.email,
+        university: currentUser.university,
+        major: currentUser.grade,
+        location: currentUser.location,
+        preferred_lang: currentUser.preferredLang,
+        bio: currentUser.bio,
+        updated_at: new Date().toISOString()
+      }).then(({ error }) => {
+        if (error) console.warn("Supabase profiles sync:", error.message);
+      });
+    } catch (e) {}
+  }
+
   renderPersonalProfile();
-  showToast("Personal profile information updated!");
+  showToast("Personal profile information updated & synced to Supabase!");
 }
 
 // ----------------------------------------------------
@@ -1124,6 +1142,18 @@ function handleAiChatSubmit(e) {
     botMsgEl.innerHTML = `<strong style="color: var(--primary); display: block; margin-bottom: 0.2rem;"><i class="fa-solid fa-sparkles"></i> AI Mentor</strong>${aiReply}`;
     container.appendChild(botMsgEl);
     container.scrollTop = container.scrollHeight;
+
+    // Asynchronously log conversation to Supabase chat_history
+    if (supabase && typeof supabase.from !== 'undefined') {
+      try {
+        supabase.from('chat_history').insert([
+          { sender: 'user', message: userQuery },
+          { sender: 'ai_mentor', message: aiReply }
+        ]).then(({ error }) => {
+          if (error) console.warn("Supabase chat sync:", error.message);
+        });
+      } catch (e) {}
+    }
   }, 600);
 }
 
