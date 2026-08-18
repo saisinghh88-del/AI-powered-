@@ -16,14 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize all platform views and components
   initApp();
-
-  // Enforce mandatory Sign In / Sign Up popup before accessing site
-  if (!currentUser.isLoggedIn) {
-    showMandatoryAuthModal();
-  } else {
-    hideMandatoryAuthModal();
-    switchTab('feed-page');
-  }
+  hideMandatoryAuthModal();
+  switchTab('feed-page');
 });
 
 function initApp() {
@@ -39,13 +33,6 @@ function initApp() {
 
 // Navigation Router Function
 function switchTab(pageId) {
-  // If not logged in, enforce the mandatory Sign In/Sign Up popup
-  if (!currentUser.isLoggedIn && pageId !== 'auth-page') {
-    showMandatoryAuthModal();
-    showToast("Please sign in or create an account first!");
-    return;
-  }
-
   const pages = document.querySelectorAll(".page-container");
   const navBtns = document.querySelectorAll(".nav-btn");
 

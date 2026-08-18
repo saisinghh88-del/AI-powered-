@@ -878,21 +878,23 @@ body {
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   z-index: 9999;
-  display: flex;
+  display: none !important;
+  pointer-events: none;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
   opacity: 0;
-  visibility: hidden;
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
 }
 
 .auth-modal-overlay.active {
+  display: flex !important;
+  pointer-events: auto;
   opacity: 1;
-  visibility: visible;
 }
 
 .auth-modal-card {
+  position: relative;
   background: #FFFFFF;
   border-radius: var(--radius-lg);
   max-width: 480px;
@@ -902,10 +904,34 @@ body {
   padding: 2.25rem;
   border: 1px solid var(--border-light);
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
-  transform: scale(0.92) translateY(15px);
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(0.95);
+  transition: all 0.3s ease;
 }
 
 .auth-modal-overlay.active .auth-modal-card {
-  transform: scale(1) translateY(0);
+  transform: scale(1);
 }
+
+.modal-close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: var(--bg-main);
+  border: 1px solid var(--border-light);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: var(--text-muted);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.modal-close-btn:hover {
+  background: #F1F5F9;
+  color: var(--dark-slate);
+}
+
