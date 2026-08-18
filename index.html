@@ -83,21 +83,36 @@
        PAGE 1: REELS FEED (INFINITE SCROLL & LEARN)
   ========================================================= -->
   <main id="feed-page" class="page-container active">
+    <!-- Hero Banner with Category Filters -->
+    <div style="background: linear-gradient(135deg, #0066FF, #38BDF8); color: white; border-radius: var(--radius-lg); padding: 1.5rem 2rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-md);">
+      <div>
+        <div style="background: rgba(255,255,255,0.2); padding: 0.2rem 0.8rem; border-radius: 99px; font-size: 0.75rem; font-weight: 800; display: inline-block; margin-bottom: 0.5rem;">
+          <i class="fa-solid fa-sparkles"></i> AI REELS RECOMMENDATION PLATFORM
+        </div>
+        <h1 style="font-size: 1.6rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.4rem;">Scroll & Master Modern Technology</h1>
+        <p style="font-size: 0.9rem; opacity: 0.95;">Convert short-form content consumption into real programming & engineering skills.</p>
+      </div>
+
+      <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+        <button class="nav-btn active" style="background: white; color: var(--primary); border: none; font-size: 0.82rem;" onclick="filterReelsByCategory('All')">All</button>
+        <button class="nav-btn" style="background: rgba(255,255,255,0.2); color: white; border: none; font-size: 0.82rem;" onclick="filterReelsByCategory('Coding')">Coding</button>
+        <button class="nav-btn" style="background: rgba(255,255,255,0.2); color: white; border: none; font-size: 0.82rem;" onclick="filterReelsByCategory('AI')">AI</button>
+        <button class="nav-btn" style="background: rgba(255,255,255,0.2); color: white; border: none; font-size: 0.82rem;" onclick="filterReelsByCategory('Gaming')">Gaming</button>
+        <button class="nav-btn" style="background: rgba(255,255,255,0.2); color: white; border: none; font-size: 0.82rem;" onclick="filterReelsByCategory('EV Tech')">EV Tech</button>
+      </div>
+    </div>
+
     <!-- Quick Horizontal Mini-Reels Carousel -->
-    <div
-      style="margin-bottom: 1.5rem; background: var(--bg-card); padding: 1rem 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-light); box-shadow: var(--shadow-sm);">
-      <div style="display: flex; justify-content: space-between; align-align: center; margin-bottom: 0.75rem;">
-        <span
-          style="font-weight: 800; font-size: 0.95rem; color: var(--dark-slate); display: flex; align-items: center; gap: 0.5rem;">
+    <div style="margin-bottom: 1.5rem; background: var(--bg-card); padding: 1rem 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-light); box-shadow: var(--shadow-sm);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+        <span style="font-weight: 800; font-size: 0.95rem; color: var(--dark-slate); display: flex; align-items: center; gap: 0.5rem;">
           <i class="fa-solid fa-fire" style="color: var(--warning);"></i> Quick Trending Reels (Tap to Jump)
         </span>
-        <span style="font-size: 0.8rem; color: var(--primary); font-weight: 700; cursor: pointer;"
-          onclick="showToast('Swipe horizontally to preview reels!')">
+        <span style="font-size: 0.8rem; color: var(--primary); font-weight: 700; cursor: pointer;" onclick="showToast('Swipe horizontally to preview reels!')">
           <i class="fa-solid fa-arrows-left-right"></i> Scroll Mini Reels
         </span>
       </div>
-      <div id="mini-reels-carousel"
-        style="display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem; scroll-behavior: smooth;">
+      <div id="mini-reels-carousel" style="display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem; scroll-behavior: smooth;">
         <!-- Rendered dynamically via app.js -->
       </div>
     </div>
