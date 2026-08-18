@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI-Powered Student Tech Recommendation Platform. Convert short video scrolling into interactive learning and skill building.">
+  <title>TechReel AI - AI-Powered Recommendation & Learn Platform</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="brand-logo" onclick="switchTab('feed-page')">
+      <div class="brand-icon">
+        <i class="fa-solid fa-microchip"></i>
+      </div>
+      <div class="brand-title">TechReel <span>AI</span></div>
+    </div>
+
+    <nav>
+      <ul class="nav-links">
+        <li>
+          <button class="nav-btn active" id="btn-feed" onclick="switchTab('feed-page')">
+            <i class="fa-solid fa-play"></i> Top Reels Feed
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" id="btn-analysis" onclick="switchTab('analysis-page')">
+            <i class="fa-solid fa-chart-pie"></i> Reel AI Analysis
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" id="btn-recs" onclick="switchTab('recs-page')">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> AI Recommendations
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" id="btn-compiler" onclick="switchTab('compiler-page')">
+            <i class="fa-solid fa-code"></i> Live Code Compiler
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" id="btn-interests" onclick="switchTab('interests-page')">
+            <i class="fa-solid fa-sliders"></i> Interest Profile
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" id="btn-dashboard" onclick="switchTab('dashboard-page')">
+            <i class="fa-solid fa-graduation-cap"></i> Dashboard
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="user-profile-widget" onclick="switchTab('auth-page')">
+      <img id="nav-user-avatar" class="user-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80" alt="Student Profile">
+      <div class="user-info-text">
+        <span id="nav-user-name" class="user-name">Alex Dev</span>
+        <span id="nav-user-streak" class="user-badge"><i class="fa-solid fa-fire"></i> 6 Day Streak</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       PAGE 1: REELS FEED (INFINITE SCROLL & LEARN)
+  ========================================================= -->
+  <main id="feed-page" class="page-container active">
+    <!-- Quick Horizontal Mini-Reels Carousel -->
+    <div style="margin-bottom: 1.5rem; background: var(--bg-card); padding: 1rem 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-light); box-shadow: var(--shadow-sm);">
+      <div style="display: flex; justify-content: space-between; align-align: center; margin-bottom: 0.75rem;">
+        <span style="font-weight: 800; font-size: 0.95rem; color: var(--dark-slate); display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-fire" style="color: var(--warning);"></i> Quick Trending Reels (Tap to Jump)
+        </span>
+        <span style="font-size: 0.8rem; color: var(--primary); font-weight: 700; cursor: pointer;" onclick="showToast('Swipe horizontally to preview reels!')">
+          <i class="fa-solid fa-arrows-left-right"></i> Scroll Mini Reels
+        </span>
+      </div>
+      <div id="mini-reels-carousel" style="display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem; scroll-behavior: smooth;">
+        <!-- Rendered dynamically via app.js -->
+      </div>
+    </div>
+
+    <div class="reels-feed-wrapper">
+      <!-- Vertical Scroll Reel Container -->
+      <div id="reels-container" class="reels-vertical-scroll">
+        <!-- Rendered dynamically via app.js -->
+      </div>
+
+      <!-- Learn Mode Side Overlay -->
+        <div class="ai-reasoning-card" style="background: linear-gradient(135deg, #FEF3C7, #FFFBEB); border-color: #FDE68A;">
+          <div class="ai-reasoning-header" style="color: #D97706;">
+            <i class="fa-solid fa-face-smile" style="color: #D97706;"></i> Easy Student Explanation (ELI5)
+          </div>
+          <p id="learn-eli5-text" style="font-size: 0.88rem; font-weight: 600; color: #92400E;">
+            Simplified explanation loading...
+          </p>
+        </div>
+
+        <div class="ai-reasoning-card" style="background: linear-gradient(135deg, #ECFDF5, #F0FDF4); border-color: #A7F3D0;">
+          <div class="ai-reasoning-header" style="color: #059669;">
+            <i class="fa-solid fa-lightbulb" style="color: #059669;"></i> Real-World Analogy
+          </div>
+          <p id="learn-analogy-text" style="font-size: 0.88rem; font-weight: 600; color: #065F46;">
+            Real-world comparison loading...
+          </p>
+        </div>
+
+        <div>
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--dark-slate);">
+            <i class="fa-solid fa-spell-check" style="color: var(--secondary);"></i> Key Terms Glossary (Simple Definition)
+          </h3>
+          <div id="learn-keywords-container" style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <!-- Keyword tags rendered dynamically -->
+          </div>
+        </div>
+
+        <div class="ai-reasoning-card">
+          <div class="ai-reasoning-header">
+            <i class="fa-solid fa-brain"></i> AI Recommendation Signal
+          </div>
+          <p id="learn-ai-reason" style="font-size: 0.88rem; color: var(--text-main);">
+            Select a reel to view AI insights and personalized learning metrics.
+          </p>
+        </div>
+
+        <div>
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--dark-slate); display: flex; justify-content: space-between; align-items: center;">
+            <span><i class="fa-solid fa-code" style="color: var(--primary);"></i> Executable Code Breakdown</span>
+            <button style="background: var(--primary-light); border: 1px solid var(--primary); color: var(--primary); font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: var(--radius-full); cursor: pointer;" onclick="openCurrentReelInCompiler()">
+              <i class="fa-solid fa-play"></i> Run in Compiler
+            </button>
+          </h3>
+          <div class="code-snippet-box">
+            <button class="code-copy-btn" onclick="copyCodeSnippet()"><i class="fa-regular fa-copy"></i> Copy</button>
+            <pre><code id="learn-code-box">// Code snippet will render here...</code></pre>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--dark-slate);">
+            <i class="fa-solid fa-lightbulb" style="color: var(--warning);"></i> Core Concept Takeaways
+          </h3>
+          <ul id="learn-takeaways-list" class="takeaway-list">
+            <!-- Rendered dynamically -->
+          </ul>
+        </div>
+
+        <div class="quiz-widget">
+          <div style="font-weight: 800; font-size: 0.92rem; color: var(--dark-slate); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-circle-question" style="color: var(--secondary);"></i> Quick Concept Quiz
+          </div>
+          <p id="quiz-question-text" style="font-size: 0.88rem; font-weight: 600; margin-bottom: 0.6rem;"></p>
+          <div id="quiz-options-container"></div>
+          <div id="quiz-feedback-box" style="margin-top: 0.6rem; font-size: 0.85rem; font-weight: 700;"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- =========================================================
+       PAGE 2: AI REEL ANALYSIS PAGE
+  ========================================================= -->
+  <main id="analysis-page" class="page-container">
+    <div class="section-header">
+      <div>
+        <h1 class="section-title"><i class="fa-solid fa-microchip" style="color: var(--primary);"></i> AI Reel Deep-Dive Analysis</h1>
+        <p class="section-subtitle">Comprehensive breakdown of technical concepts, complexity scores, and student applications.</p>
+      </div>
+      <button class="btn-primary" style="width: auto; padding: 0.6rem 1.5rem;" onclick="generateAiReport()">
+        <i class="fa-solid fa-rotate-right"></i> Refresh Analysis
+      </button>
+    </div>
+
+    <div class="analysis-grid">
+      <div class="analysis-main-card">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+          <span id="analysis-category-badge" class="category-tag"><i class="fa-solid fa-gamepad"></i> Gaming Graphics</span>
+          <span style="font-weight: 700; color: var(--primary); font-size: 0.9rem;">
+            <i class="fa-solid fa-signal"></i> Difficulty: <span id="analysis-difficulty">Intermediate</span>
+          </span>
+        </div>
+
+        <h2 id="analysis-title" style="font-size: 1.5rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1rem;">
+          How Game Engines Use Math & Shader Code for Lighting
+        </h2>
+
+        <p id="analysis-summary" style="color: var(--text-main); font-size: 1rem; margin-bottom: 1rem;">
+          This content explores the fundamental linear algebra behind real-time 3D lighting shaders. By evaluating the vector dot product of surface normals and light rays, GPUs perform calculations for thousands of pixels in parallel.
+        </p>
+
+        <!-- Simplified Explanation Block -->
+        <div style="background: #FFFBEB; border: 1px solid #FDE68A; padding: 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+          <div style="font-weight: 800; color: #D97706; font-size: 0.95rem; margin-bottom: 0.4rem;">
+            <i class="fa-solid fa-face-smile"></i> Plain English Explanation (ELI5)
+          </div>
+          <p id="analysis-eli5" style="font-size: 0.9rem; font-weight: 600; color: #92400E; margin-bottom: 0.6rem;"></p>
+          <div style="font-weight: 800; color: #059669; font-size: 0.95rem; margin-bottom: 0.2rem;">
+            <i class="fa-solid fa-lightbulb"></i> Real-World Analogy
+          </div>
+          <p id="analysis-analogy" style="font-size: 0.9rem; font-weight: 600; color: #065F46;"></p>
+        </div>
+
+        <div class="concept-breakdown-card">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--dark-slate); margin-bottom: 0.75rem;">
+            <i class="fa-solid fa-diagram-project" style="color: var(--indigo);"></i> Technical Knowledge Tree
+          </h3>
+          <div id="mindmap-container">
+            <div class="mindmap-node"><i class="fa-solid fa-arrow-right"></i> 1. Linear Algebra: Vector Dot Product (N · L)</div>
+            <div class="mindmap-node"><i class="fa-solid fa-arrow-right"></i> 2. GPU Architecture: Fragment Shaders & Rasterization</div>
+            <div class="mindmap-node"><i class="fa-solid fa-arrow-right"></i> 3. Game Engine Implementation: HLSL / GLSL Code</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--dark-slate); margin-bottom: 0.75rem;">
+            <i class="fa-solid fa-laptop-code" style="color: var(--primary);"></i> Hands-on Student Project Idea
+          </h3>
+          <div style="background: #F0F7FF; border: 1px solid #BFDBFE; padding: 1.25rem; border-radius: var(--radius-md);">
+            <p style="font-size: 0.92rem; font-weight: 600; color: var(--dark-slate);">
+              Build a Three.js interactive lighting simulator where users adjust light angle sliders to observe real-time diffuse shading updates.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-sidebar">
+        <div class="sidebar-widget">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--dark-slate); margin-bottom: 1rem;">
+            <i class="fa-solid fa-bullseye" style="color: var(--danger);"></i> Student Skill Impact
+          </h3>
+          <div class="skill-bar-row">
+            <div class="skill-label-flex"><span>3D Graphics Math</span><span>+15 pts</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width: 85%;"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-label-flex"><span>GPU Shaders (HLSL)</span><span>+20 pts</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width: 70%;"></div></div>
+          </div>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--dark-slate); margin-bottom: 1rem;">
+            <i class="fa-solid fa-book-open" style="color: var(--primary);"></i> Recommended Prerequisite Courses
+          </h3>
+          <div id="analysis-courses-list">
+            <!-- Courses rendered dynamically -->
+          </div>
+        </div>
+      </div>
+  </main>
+
+  <!-- =========================================================
+       LIVE INTERACTIVE CODE COMPILER PAGE
+  ========================================================= -->
+  <main id="compiler-page" class="page-container">
+    <div class="section-header">
+      <div>
+        <h1 class="section-title"><i class="fa-solid fa-code" style="color: var(--primary);"></i> Student Live Code Compiler & Sandbox</h1>
+        <p class="section-subtitle">Write, edit, run, and test code for JavaScript, Python, HTML/CSS, and C++ algorithm snippets instantly.</p>
+      </div>
+      <div style="display: flex; gap: 0.5rem;">
+        <button class="nav-btn active" id="lang-btn-js" onclick="selectCompilerLanguage('javascript')">JavaScript</button>
+        <button class="nav-btn" id="lang-btn-py" onclick="selectCompilerLanguage('python')">Python</button>
+        <button class="nav-btn" id="lang-btn-html" onclick="selectCompilerLanguage('html')">HTML/CSS Preview</button>
+        <button class="nav-btn" id="lang-btn-cpp" onclick="selectCompilerLanguage('cpp')">C++ (Simulated)</button>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; height: calc(100vh - 200px); min-height: 500px;">
+      <!-- Code Editor Panel -->
+      <div style="background: var(--dark-slate); border-radius: var(--radius-lg); padding: 1.25rem; display: flex; flex-direction: column; border: 1px solid var(--border-light); box-shadow: var(--shadow-md);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; color: white;">
+          <span style="font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-terminal" style="color: var(--secondary);"></i> Editor (<span id="current-lang-label">JavaScript</span>)
+          </span>
+          <div style="display: flex; gap: 0.5rem;">
+            <button onclick="resetCompilerTemplate()" style="background: rgba(255,255,255,0.1); border: none; color: #94A3B8; padding: 0.3rem 0.7rem; border-radius: var(--radius-sm); font-size: 0.8rem; cursor: pointer;">
+              <i class="fa-solid fa-rotate-left"></i> Reset
+            </button>
+            <button onclick="runCodeInCompiler()" class="btn-primary" style="width: auto; padding: 0.4rem 1.2rem; font-size: 0.88rem; background: linear-gradient(135deg, var(--success), #059669);">
+              <i class="fa-solid fa-play"></i> Run Code (Ctrl+Enter)
+            </button>
+          </div>
+        </div>
+
+        <textarea id="compiler-editor" style="flex: 1; width: 100%; background: #080E1A; color: #7DD3FC; font-family: 'Fira Code', monospace; font-size: 0.92rem; padding: 1rem; border: 1px solid #1E293B; border-radius: var(--radius-md); resize: none; outline: none; line-height: 1.5; tab-size: 2;" spellcheck="false">// Select a reel snippet or start writing your code here...
+function computeLighting(normalAngle, lightAngle) {
+  const dotProduct = Math.max(0, normalAngle * lightAngle);
+  console.log("Computed Surface Brightness:", dotProduct * 100 + "%");
+  return dotProduct;
+}
+
+computeLighting(0.85, 0.92);
+</textarea>
+      </div>
+
+      <!-- Compiler Output & Console Panel -->
+      <div style="background: var(--bg-card); border-radius: var(--radius-lg); padding: 1.25rem; display: flex; flex-direction: column; border: 1px solid var(--border-light); box-shadow: var(--shadow-md);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+          <span style="font-weight: 800; font-size: 0.95rem; color: var(--dark-slate); display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-square-poll-vertical" style="color: var(--primary);"></i> Execution Output & Console
+          </span>
+          <button onclick="clearCompilerConsole()" style="background: var(--primary-light); border: none; color: var(--primary); font-size: 0.78rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: var(--radius-sm); cursor: pointer;">
+            Clear Console
+          </button>
+        </div>
+
+        <div id="compiler-console-output" style="flex: 1; background: #0B1329; color: #F1F5F9; font-family: 'Fira Code', monospace; font-size: 0.88rem; padding: 1rem; border-radius: var(--radius-md); overflow-y: auto; white-space: pre-wrap; line-height: 1.5;">
+// Click "Run Code" above to execute your program...
+        </div>
+
+        <div style="margin-top: 1rem; padding: 0.75rem; background: #F0F7FF; border: 1px solid #BFDBFE; border-radius: var(--radius-sm); display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; color: var(--dark-slate); font-weight: 600;">
+          <i class="fa-solid fa-circle-info" style="color: var(--primary);"></i>
+          <span>Supports real-time JavaScript evaluation, Python interpreter, HTML live rendering, and C++ algorithm simulation!</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- =========================================================
+       PAGE 3: INTEREST PROFILE PAGE
+  ========================================================= -->
+  <main id="interests-page" class="page-container">
+    <div class="section-header">
+      <div>
+        <h1 class="section-title"><i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Student Interest Profile</h1>
+        <p class="section-subtitle">Customize tech topic weights to fine-tune your personalized AI recommendation engine.</p>
+      </div>
+      <button class="btn-primary" style="width: auto; padding: 0.6rem 1.8rem;" onclick="saveInterests()">
+        <i class="fa-solid fa-floppy-disk"></i> Save Preferences
+      </button>
+    </div>
+
+    <div id="interests-cards-grid" class="interest-grid">
+      <!-- Interest Cards Rendered dynamically -->
+    </div>
+
+    <div style="background: var(--bg-card); border-radius: var(--radius-lg); padding: 2rem; border: 1px solid var(--border-light); box-shadow: var(--shadow-sm);">
+      <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1rem;">
+        <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--secondary);"></i> AI Learning Goals & Skill Target
+      </h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+        <div>
+          <label class="form-label">Primary Career Objective</label>
+          <select class="form-input" id="career-goal-select">
+            <option value="Game Developer & Engine Engineer">Game Developer & Engine Engineer</option>
+            <option value="AI & Machine Learning Researcher">AI & Machine Learning Researcher</option>
+            <option value="Full-Stack Web Software Engineer">Full-Stack Web Software Engineer</option>
+            <option value="Cybersecurity Analyst">Cybersecurity Analyst</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Target Weekly Learning Hours</label>
+          <input type="number" class="form-input" id="weekly-hours-input" value="5" min="1" max="40">
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- =========================================================
+       PAGE 4: AI RECOMMENDATIONS ENGINE PAGE
+  ========================================================= -->
+  <main id="recs-page" class="page-container">
+    <div class="section-header">
+      <div>
+        <h1 class="section-title"><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--indigo);"></i> AI Recommendation Engine</h1>
+        <p class="section-subtitle">Discover high-value reels ranked specifically for your skill gaps and interest alignment.</p>
+      </div>
+    </div>
+
+    <div id="recommendations-container" class="recommendation-list">
+      <!-- Recommendations rendered dynamically -->
+    </div>
+  </main>
+
+  <!-- =========================================================
+       PAGE 5: USER DASHBOARD
+  ========================================================= -->
+  <main id="dashboard-page" class="page-container">
+    <div class="section-header">
+      <div>
+        <h1 class="section-title"><i class="fa-solid fa-graduation-cap" style="color: var(--primary);"></i> Student Learning Dashboard</h1>
+        <p class="section-subtitle">Track your watch stats, tech skill growth, and saved concept notebook.</p>
+      </div>
+    </div>
+
+    <!-- Metrics Cards -->
+    <div class="metrics-row">
+      <div class="metric-card">
+        <div class="metric-icon-wrapper" style="background: #E0F2FE; color: #0284C7;">
+          <i class="fa-solid fa-clock"></i>
+        </div>
+        <div>
+          <div id="dash-watch-time" class="metric-val">3.4 hrs</div>
+          <div class="metric-lbl">Weekly Watch & Learn Time</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon-wrapper" style="background: #FEF3C7; color: #D97706;">
+          <i class="fa-solid fa-fire"></i>
+        </div>
+        <div>
+          <div id="dash-streak" class="metric-val">6 Days</div>
+          <div class="metric-lbl">Active Daily Learning Streak</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon-wrapper" style="background: #DCFCE7; color: #15803D;">
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+        <div>
+          <div id="dash-points" class="metric-val">1,420</div>
+          <div class="metric-lbl">Quiz XP Points</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon-wrapper" style="background: #F3E8FF; color: #7E22CE;">
+          <i class="fa-solid fa-bookmark"></i>
+        </div>
+        <div>
+          <div id="dash-saved-count" class="metric-val">2 Saved</div>
+          <div class="metric-lbl">Concept Notes Bookmarked</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-split">
+      <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 1.75rem; box-shadow: var(--shadow-sm);">
+        <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1.5rem;">
+          <i class="fa-solid fa-chart-column" style="color: var(--primary);"></i> Tech Skills Mastered Radar
+        </h3>
+        <div id="skill-bars-container">
+          <!-- Skill Progress Bars rendered dynamically -->
+        </div>
+      </div>
+
+      <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 1.75rem; box-shadow: var(--shadow-sm);">
+        <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1.25rem;">
+          <i class="fa-solid fa-book-bookmark" style="color: var(--indigo);"></i> Saved Concept Notebook
+        </h3>
+        <div id="saved-notebook-container" style="display: flex; flex-direction: column; gap: 1rem;">
+          <!-- Notebook Cards rendered dynamically -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- =========================================================
+       PAGE 6: AUTHENTICATION / LOGIN PAGE
+  ========================================================= -->
+  <main id="auth-page" class="page-container">
+    <div class="auth-container">
+      <div class="auth-tabs">
+        <button class="auth-tab-btn active" onclick="switchAuthTab('login')">Sign In</button>
+        <button class="auth-tab-btn" onclick="switchAuthTab('signup')">Sign Up</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" onsubmit="handleAuthSubmit(event, 'login')">
+        <div class="form-group">
+          <label class="form-label">Student Email</label>
+          <input type="email" class="form-input" placeholder="student@university.edu" required value="alex.student@techlearn.edu">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" placeholder="••••••••" required value="password123">
+        </div>
+        <button type="submit" class="btn-primary">Sign In to TechReel AI</button>
+      </form>
+
+      <!-- Signup Form -->
+      <form id="signup-form" style="display: none;" onsubmit="handleAuthSubmit(event, 'signup')">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" placeholder="Alex Student" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Student Email</label>
+          <input type="email" class="form-input" placeholder="student@university.edu" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Major / Field of Study</label>
+          <input type="text" class="form-input" placeholder="Computer Science / AI / Gaming" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-primary">Create Student Account</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Toast Notification element -->
+  <div id="toast" class="toast-msg">
+    <i class="fa-solid fa-circle-check" style="color: var(--secondary); font-size: 1.2rem;"></i>
+    <span id="toast-text">Action completed!</span>
+  </div>
+
+  <!-- JavaScript Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
