@@ -374,8 +374,18 @@ computeLighting(0.85, 0.92);
   <main id="recs-page" class="page-container">
     <div class="section-header">
       <div>
-        <h1 class="section-title"><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--indigo);"></i> AI Recommendation Engine</h1>
-        <p class="section-subtitle">Discover high-value reels ranked specifically for your skill gaps and interest alignment.</p>
+        <h1 class="section-title"><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--indigo);"></i> AI Recommendation Bot</h1>
+        <p class="section-subtitle">Converts student raw interest topics into high-value educational tech reels.</p>
+      </div>
+    </div>
+
+    <!-- AI Bot Interest Conversion Banner -->
+    <div style="background: linear-gradient(135deg, #1E1B4B, #312E81); color: white; border-radius: var(--radius-lg); padding: 1.75rem; margin-bottom: 2rem; box-shadow: var(--shadow-md);">
+      <div style="font-weight: 800; font-size: 1.1rem; color: #A5B4FC; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+        <i class="fa-solid fa-robot"></i> AI Recommendation Bot Engine (Interest -> Tech Conversion)
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;" id="ai-bot-conversions-container">
+        <!-- Rendered dynamically -->
       </div>
     </div>
 
@@ -402,8 +412,18 @@ computeLighting(0.85, 0.92);
           <i class="fa-solid fa-clock"></i>
         </div>
         <div>
-          <div id="dash-watch-time" class="metric-val">3.4 hrs</div>
-          <div class="metric-lbl">Weekly Watch & Learn Time</div>
+          <div id="dash-watch-time" class="metric-val">3.4 hrs (204 min)</div>
+          <div class="metric-lbl">Total Watch Time Analyzed</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon-wrapper" style="background: #ECFDF5; color: #059669;">
+          <i class="fa-solid fa-chart-line"></i>
+        </div>
+        <div>
+          <div id="dash-learning-score" class="metric-val">92 / 100</div>
+          <div class="metric-lbl">AI Learning Efficiency Score</div>
         </div>
       </div>
 
@@ -418,30 +438,44 @@ computeLighting(0.85, 0.92);
       </div>
 
       <div class="metric-card">
-        <div class="metric-icon-wrapper" style="background: #DCFCE7; color: #15803D;">
+        <div class="metric-icon-wrapper" style="background: #F3E8FF; color: #7E22CE;">
           <i class="fa-solid fa-trophy"></i>
         </div>
         <div>
-          <div id="dash-points" class="metric-val">1,420</div>
-          <div class="metric-lbl">Quiz XP Points</div>
-        </div>
-      </div>
-
-      <div class="metric-card">
-        <div class="metric-icon-wrapper" style="background: #F3E8FF; color: #7E22CE;">
-          <i class="fa-solid fa-bookmark"></i>
-        </div>
-        <div>
-          <div id="dash-saved-count" class="metric-val">2 Saved</div>
-          <div class="metric-lbl">Concept Notes Bookmarked</div>
+          <div id="dash-points" class="metric-val">1,420 XP</div>
+          <div class="metric-lbl">Concept Quiz Score</div>
         </div>
       </div>
     </div>
 
-    <div class="dashboard-split">
+    <!-- AI Detected Interests & Recommended Careers Section -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+      <!-- AI Detected Interests -->
+      <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+        <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-brain" style="color: var(--primary);"></i> AI Detected Interests (Topic + Context)
+        </h3>
+        <div id="dash-ai-interests-container" style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Recommended Careers -->
+      <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+        <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-briefcase" style="color: var(--indigo);"></i> Recommended Tech Careers
+        </h3>
+        <div id="dash-careers-container" style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard Split: Skills Explored & Weekly Report -->
+    <div class="dashboard-split" style="margin-bottom: 2rem;">
       <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 1.75rem; box-shadow: var(--shadow-sm);">
         <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1.5rem;">
-          <i class="fa-solid fa-chart-column" style="color: var(--primary);"></i> Tech Skills Mastered Radar
+          <i class="fa-solid fa-chart-column" style="color: var(--primary);"></i> Tech Skills Explored & Mastered
         </h3>
         <div id="skill-bars-container">
           <!-- Skill Progress Bars rendered dynamically -->
@@ -450,11 +484,21 @@ computeLighting(0.85, 0.92);
 
       <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 1.75rem; box-shadow: var(--shadow-sm);">
         <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1.25rem;">
-          <i class="fa-solid fa-book-bookmark" style="color: var(--indigo);"></i> Saved Concept Notebook
+          <i class="fa-solid fa-file-lines" style="color: var(--secondary);"></i> Weekly Learning Report
         </h3>
-        <div id="saved-notebook-container" style="display: flex; flex-direction: column; gap: 1rem;">
-          <!-- Notebook Cards rendered dynamically -->
+        <div id="dash-weekly-report" style="background: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 1.25rem; font-size: 0.88rem; color: var(--text-main); line-height: 1.6;">
+          <!-- Weekly report rendered dynamically -->
         </div>
+      </div>
+    </div>
+
+    <!-- Saved Concept Notebook -->
+    <div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-light); padding: 1.75rem; box-shadow: var(--shadow-sm);">
+      <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--dark-slate); margin-bottom: 1.25rem;">
+        <i class="fa-solid fa-book-bookmark" style="color: var(--indigo);"></i> Saved Concept Notebook
+      </h3>
+      <div id="saved-notebook-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+        <!-- Notebook Cards rendered dynamically -->
       </div>
     </div>
   </main>

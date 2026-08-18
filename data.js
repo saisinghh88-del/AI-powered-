@@ -246,30 +246,85 @@ const weatherTool = {
       correct: 1,
       explanation: "Function/Tool Calling allows the model to output parameters that run live external APIs."
     },
+  {
+    id: "reel-6",
+    title: "Electric Vehicle (EV) Battery Management Systems & Physics",
+    creator: "EV Tech Lab",
+    creatorAvatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80",
+    category: "EV Tech",
+    tags: ["Cars", "EV Tech", "engineering", "coding"],
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-code-41539-large.mp4",
+    poster: "https://images.unsplash.com/photo-1558441719-6745080a4289?w=800&auto=format&fit=crop&q=80",
+    likes: 19800,
+    comments: 512,
+    shares: 1240,
+    duration: "0:55",
+    difficulty: "Intermediate",
+    aiMatchScore: 96,
+    aiReasoning: "AI Bot Mapping: Detected interest in 'Cars' -> Converted to 'EV Tech & Battery Microcontroller Code'.",
+    summary: "How modern electric cars monitor cell voltage, temperature, and regenerative braking power using C embedded code.",
+    simpleAnalogy: "Like a smart smartphone battery charger that balances 7,000 tiny battery cells simultaneously so your electric car runs safely for miles!",
+    eli5Summary: "Electric cars use tiny computers to make sure all their battery cells stay cool, safe, and charged evenly.",
+    keywordsGlossary: [
+      { term: "BMS", simpleDef: "Battery Management System—the brain that protects electric car batteries." },
+      { term: "Regenerative Braking", simpleDef: "Turning your car's stopping energy back into electricity to recharge the battery." }
+    ],
+    codeSnippet: `// EV Battery Monitoring Loop
+float readCellVoltage(int cellId) {
+    float voltage = analogRead(cellId) * (5.0 / 1023.0);
+    if (voltage > 4.25) triggerOverchargeProtection();
+    return voltage;
+}`,
+    keyTakeaways: [
+      "BMS microcontrollers monitor thousands of Lithium-Ion cells in real time.",
+      "Regenerative braking reclaims Kinetic Energy back into electric potential."
+    ],
+    quiz: {
+      question: "What is the primary role of an EV Battery Management System (BMS)?",
+      options: ["Paint car body", "Cell voltage balancing & thermal safety", "Play car music", "Wipe windshield"],
+      correct: 1,
+      explanation: "The BMS continuously balances cell voltages and prevents dangerous overheating!"
+    },
     recommendedCourses: [
-      { name: "Building Autonomous Agents in JS & Python", platform: "DeepAI Institute", duration: "5h 00m" }
+      { name: "Embedded C Systems for Electric Vehicles", platform: "AutoTech Edu", duration: "3h 45m" }
     ]
   }
+];
+
+const AI_BOT_CONVERSIONS = [
+  { rawInterest: "Gaming", convertedTech: "Game Dev & Physics Shader Reels", icon: "fa-gamepad" },
+  { rawInterest: "Cars / Automotive", convertedTech: "EV Tech & Autonomous Microcontroller Reels", icon: "fa-car" },
+  { rawInterest: "AI / ChatGPT", convertedTech: "LLM Function Calling & PyTorch Agent Reels", icon: "fa-brain" },
+  { rawInterest: "Social Media / Web", convertedTech: "Full-Stack Web Dev & Architecture Reels", icon: "fa-globe" },
+  { rawInterest: "Cyber Security", convertedTech: "Ethical Hacking & Network Defense Reels", icon: "fa-shield-halved" }
 ];
 
 const INITIAL_USER = {
   name: "Alex Dev",
   email: "alex.student@techlearn.edu",
+  isLoggedIn: false, // Default: Must login first!
   avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80",
   grade: "Undergraduate - CS Major",
   weeklyGoalHours: 5,
   completedHours: 3.4,
+  watchTimeMinutes: 204,
   streakDays: 6,
   points: 1420,
   level: "Level 4 - Code Explorer",
-  interests: [
-    { name: "Coding", weight: 90, icon: "fa-code" },
-    { name: "AI", weight: 95, icon: "fa-brain" },
-    { name: "Gaming", weight: 85, icon: "fa-gamepad" },
-    { name: "Programming", weight: 88, icon: "fa-laptop-code" },
-    { name: "Cybersecurity", weight: 45, icon: "fa-shield-halved" },
-    { name: "Web Dev", weight: 70, icon: "fa-globe" }
+  learningScore: 92,
+  rawInterests: ["Gaming", "Cars", "AI", "Programming"],
+  detectedAiInterests: [
+    { topic: "Game Dev & Physics Shaders", source: "Gaming", confidence: 98 },
+    { topic: "EV Tech & Embedded Battery C Code", source: "Cars", confidence: 96 },
+    { topic: "Autonomous AI Agents & PyTorch", source: "AI", confidence: 95 }
   ],
+  recommendedCareers: [
+    { title: "Game Engine Programmer", match: 96, avgSalary: "$125,000/yr" },
+    { title: "EV Software Firmware Engineer", match: 94, avgSalary: "$135,000/yr" },
+    { title: "AI Agent Systems Architect", match: 98, avgSalary: "$150,000/yr" }
+  ],
+  likedReelIds: ["reel-1", "reel-2", "reel-5"],
+  dislikedReelIds: [],
   savedNotebook: [
     {
       reelId: "reel-1",
@@ -287,10 +342,10 @@ const INITIAL_USER = {
     }
   ],
   skillLevels: {
-    "AI / Machine Learning": 78,
-    "Game Development": 65,
-    "Python & Algorithms": 85,
-    "Clean Code & Architecture": 70,
+    "AI & PyTorch": 78,
+    "Game Dev & Shaders": 65,
+    "EV Tech & Embedded C": 82,
+    "Python & Clean Code": 85,
     "Web Engineering": 60
   }
 };

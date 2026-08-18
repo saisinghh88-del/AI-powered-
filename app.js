@@ -6,43 +6,33 @@ let activeReelIndex = 0;
 let activeCategoryFilter = "All";
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Enforce mandatory login before seeing content
+  if (!currentUser.isLoggedIn) {
+    switchTab('auth-page');
+    showToast("Please sign in to access TechReel AI features!");
+  } else {
+    initApp();
+  }
+});
+
+function initApp() {
   renderReelsFeed();
   renderMiniReelsCarousel();
   renderInterestProfile();
   renderRecommendations();
+  renderAiBotConversions();
   renderDashboard();
   renderAnalysisPage(currentReels[0]);
-});
-
-// Render Quick Horizontal Mini-Reels Carousel on Home Page
-function renderMiniReelsCarousel() {
-  const container = document.getElementById("mini-reels-carousel");
-  if (!container) return;
-
-  container.innerHTML = currentReels.map(reel => `
-    <div onclick="jumpToReel('${reel.id}')" style="min-width: 140px; width: 140px; height: 210px; border-radius: var(--radius-md); overflow: hidden; position: relative; cursor: pointer; flex-shrink: 0; border: 2px solid var(--border-light); transition: var(--transition);" onmouseover="this.style.transform='scale(1.04)'; this.style.borderColor='var(--primary)';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='var(--border-light)';">
-      <img src="${reel.poster}" style="width: 100%; height: 100%; object-fit: cover;" alt="${reel.title}">
-      <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,23,42,0.9), transparent 60%); padding: 0.6rem; display: flex; flex-direction: column; justify-content: space-between; color: white;">
-        <span style="background: rgba(0,102,255,0.85); font-size: 0.65rem; font-weight: 800; padding: 0.2rem 0.5rem; border-radius: 99px; width: fit-content;">${reel.category}</span>
-        <div>
-          <div style="font-size: 0.72rem; font-weight: 700; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 0.2rem;">${reel.title}</div>
-          <div style="font-size: 0.65rem; color: #7DD3FC; font-weight: 700;"><i class="fa-solid fa-play"></i> Tap to watch</div>
-        </div>
-      </div>
-    </div>
-  `).join('');
 }
 
-function jumpToReel(reelId) {
-  const targetCard = document.getElementById(`reel-card-${reelId}`);
-  if (targetCard) {
-    targetCard.scrollIntoView({ behavior: 'smooth' });
-    showToast("Jumped to selected Reel!");
-  }
-}
-
-// Navigation Router Function
+// Navigation Router Function with Strict Login Guard
 function switchTab(pageId) {
+  // MUST LOGIN BEFORE ANYTHING TO USE THIS SITE
+  if (!currentUser.isLoggedIn && pageId !== 'auth-page') {
+    showToast("Must login before accessing website features!");
+    pageId = 'auth-page';
+  }
+
   const pages = document.querySelectorAll(".page-container");
   const navBtns = document.querySelectorAll(".nav-btn");
 
@@ -52,7 +42,6 @@ function switchTab(pageId) {
   const targetPage = document.getElementById(pageId);
   if (targetPage) targetPage.classList.add("active");
 
-  // Highlight Nav Button
   const btnMap = {
     "feed-page": "btn-feed",
     "analysis-page": "btn-analysis",
@@ -555,12 +544,78 @@ function renderRecommendations() {
   `).join('');
 }
 
+// Render AI Bot Interest Conversions
+function renderAiBotConversions() {
+  const container = document.getElementById("ai-bot-conversions-container");
+  if (!container || !AI_BOT_CONVERSIONS) return;
+
+  container.innerHTML = AI_BOT_CONVERSIONS.map(conv => `
+    <div style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-md); padding: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
+        <i class="fa-solid ${conv.icon}" style="color: var(--secondary); font-size: 1.1rem;"></i>
+        <span style="font-weight: 700; font-size: 0.95rem; color: white;">"${conv.rawInterest}"</span>
+      </div>
+      <div style="font-size: 0.78rem; color: #A5B4FC; display: flex; align-items: center; gap: 0.4rem; font-weight: 600;">
+        <i class="fa-solid fa-arrow-right"></i> ${conv.convertedTech}
+      </div>
+    </div>
+  `).join('');
+}
+
 // Dashboard Page Rendering
 function renderDashboard() {
-  document.getElementById("dash-watch-time").innerText = `${currentUser.completedHours} hrs`;
-  document.getElementById("dash-streak").innerText = `${currentUser.streakDays} Days`;
-  document.getElementById("dash-points").innerText = currentUser.points.toLocaleString();
-  document.getElementById("dash-saved-count").innerText = `${currentUser.savedNotebook.length} Saved`;
+  const watchTimeEl = document.getElementById("dash-watch-time");
+  const streakEl = document.getElementById("dash-streak");
+  const pointsEl = document.getElementById("dash-points");
+
+  if (watchTimeEl) watchTimeEl.innerText = `${currentUser.completedHours} hrs (${currentUser.watchTimeMinutes} min)`;
+  if (streakEl) streakEl.innerText = `${currentUser.streakDays} Days`;
+  if (pointsEl) pointsEl.innerText = `${currentUser.points.toLocaleString()} XP`;
+
+  // Render AI Detected Interests
+  const aiInterestsContainer = document.getElementById("dash-ai-interests-container");
+  if (aiInterestsContainer && currentUser.detectedAiInterests) {
+    aiInterestsContainer.innerHTML = currentUser.detectedAiInterests.map(item => `
+      <div style="background: #F8FAFC; border: 1px solid var(--border-light); border-left: 4px solid var(--primary); padding: 0.75rem 1rem; border-radius: var(--radius-sm); display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: 700; font-size: 0.9rem; color: var(--dark-slate);">${item.topic}</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">Source Interest: <strong>${item.source}</strong></div>
+        </div>
+        <span style="background: var(--primary-light); color: var(--primary); font-size: 0.75rem; font-weight: 800; padding: 0.2rem 0.6rem; border-radius: var(--radius-full);">
+          ${item.confidence}% Match
+        </span>
+      </div>
+    `).join('');
+  }
+
+  // Render Recommended Careers
+  const careersContainer = document.getElementById("dash-careers-container");
+  if (careersContainer && currentUser.recommendedCareers) {
+    careersContainer.innerHTML = currentUser.recommendedCareers.map(car => `
+      <div style="background: #F8FAFC; border: 1px solid var(--border-light); border-left: 4px solid var(--indigo); padding: 0.75rem 1rem; border-radius: var(--radius-sm); display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: 700; font-size: 0.9rem; color: var(--dark-slate);">${car.title}</div>
+          <div style="font-size: 0.75rem; color: var(--success); font-weight: 700;">Est Salary: ${car.avgSalary}</div>
+        </div>
+        <span style="background: #EEF2FF; color: var(--indigo); font-size: 0.75rem; font-weight: 800; padding: 0.2rem 0.6rem; border-radius: var(--radius-full);">
+          ${car.match}% Skill Match
+        </span>
+      </div>
+    `).join('');
+  }
+
+  // Render Weekly Report
+  const weeklyReportEl = document.getElementById("dash-weekly-report");
+  if (weeklyReportEl) {
+    weeklyReportEl.innerHTML = `
+      <p style="margin-bottom: 0.5rem;"><strong>📊 Weekly AI Learning Synthesis:</strong></p>
+      <ul style="padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.3rem;">
+        <li>Watched <strong>${currentUser.watchTimeMinutes} minutes</strong> of tech content across <strong>Gaming, EV Tech, and AI Agents</strong>.</li>
+        <li>Liked <strong>${currentUser.likedReelIds.length} high-value reels</strong> and answered <strong>${Math.floor(currentUser.points / 50)} concept quizzes</strong> correctly.</li>
+        <li>Highest skill progress made in <strong>Python & Clean Code (${currentUser.skillLevels['Python & Clean Code']}%)</strong> and <strong>EV Tech (${currentUser.skillLevels['EV Tech & Embedded C']}%)</strong>.</li>
+      </ul>
+    `;
+  }
 
   // Render Skill Bars
   const skillContainer = document.getElementById("skill-bars-container");
@@ -594,7 +649,7 @@ function renderDashboard() {
   }
 }
 
-// Bookmark & Likes
+// Like / Dislike Functionality
 function toggleLike(reelId, btn) {
   const reel = currentReels.find(r => r.id === reelId);
   if (!reel) return;
@@ -604,12 +659,26 @@ function toggleLike(reelId, btn) {
 
   if (btn.classList.contains("active")) {
     reel.likes++;
-    showToast("Liked Reel!");
+    if (!currentUser.likedReelIds.includes(reelId)) currentUser.likedReelIds.push(reelId);
+    showToast("Liked Reel! Added to AI Interest Analyzer.");
   } else {
     reel.likes--;
+    currentUser.likedReelIds = currentUser.likedReelIds.filter(id => id !== reelId);
   }
 
   if (countSpan) countSpan.innerText = formatNumber(reel.likes);
+  renderDashboard();
+}
+
+function toggleDislike(reelId, btn) {
+  if (!currentUser.dislikedReelIds.includes(reelId)) {
+    currentUser.dislikedReelIds.push(reelId);
+    showToast("Disliked Reel. AI will adjust your feed recommendations.");
+  } else {
+    currentUser.dislikedReelIds = currentUser.dislikedReelIds.filter(id => id !== reelId);
+    showToast("Removed Dislike preference.");
+  }
+  btn.classList.toggle("active");
 }
 
 function bookmarkReel(reelId) {
@@ -660,8 +729,10 @@ function switchAuthTab(tab) {
 
 function handleAuthSubmit(e, type) {
   e.preventDefault();
-  showToast(type === "login" ? "Signed in successfully!" : "Account created! Welcome to TechReel AI.");
+  currentUser.isLoggedIn = true;
+  initApp();
   switchTab("feed-page");
+  showToast(type === "login" ? "Signed in successfully! Welcome to TechReel AI." : "Account created! Welcome to TechReel AI.");
 }
 
 // Utility Toast Function
